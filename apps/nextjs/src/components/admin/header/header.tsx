@@ -6,7 +6,7 @@ export type HeaderProps = {
   breadcrumbs?: IBreadcrumb[];
 };
 
-export const Header: FC<HeaderProps> = ({ breadcrumbs = [] }) => {
+export const AdminHeader: FC<HeaderProps> = ({ breadcrumbs = [] }) => {
   return (
     <>
       <div className="navbar bg-base-100 px-10 pt-8">

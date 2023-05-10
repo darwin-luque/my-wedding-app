@@ -1,13 +1,13 @@
 import Link from 'next/link';
 import { FC } from 'react';
 
-export type SidebarElementProps = {
+export type AdminSidebarElementProps = {
   href: string;
   label: string;
   icon: JSX.Element;
 };
 
-export const SidebarElement: FC<SidebarElementProps> = ({
+export const AdminSidebarElement: FC<AdminSidebarElementProps> = ({
   href,
   label,
   icon,

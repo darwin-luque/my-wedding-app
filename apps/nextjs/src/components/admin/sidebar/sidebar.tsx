@@ -6,54 +6,70 @@ import {
   BsFillCalendarEventFill,
   BsFillQuestionCircleFill,
   BsFillFileEarmarkRichtextFill,
+  BsFillPersonFill,
 } from 'react-icons/bs';
 import Link from 'next/link';
 import { FC, PropsWithChildren } from 'react';
 import { AdminLogo } from '../logo';
-import { SidebarElement, SidebarElementProps } from './element';
+import { AdminSidebarElement, AdminSidebarElementProps } from './element';
+import {
+  AdminSidebarSection,
+  AdminSidebarSectionProps,
+} from './section/section';
 
-const elements: (SidebarElementProps & { id: number })[] = [
+const singleElements: AdminSidebarElementProps[] = [
   {
-    id: 1,
     label: 'Dashboard',
     href: '/admin',
     icon: <BsFillGridFill size={20} />,
   },
   {
-    id: 2,
-    label: 'Families',
-    href: '/admin/families',
-    icon: <BsFillPeopleFill size={20} />,
-  },
-  {
-    id: 3,
-    label: 'Invitations',
-    href: '/admin/invitations',
-    icon: <BsFillEnvelopePaperFill size={20} />,
-  },
-  {
-    id: 4,
-    label: 'Events',
-    href: '/admin/events',
-    icon: <BsFillCalendarEventFill size={20} />,
-  },
-  {
-    id: 5,
     label: 'FAQ',
     href: '/admin/faq',
     icon: <BsFillQuestionCircleFill size={20} />,
   },
   {
-    id: 6,
     label: 'Assets',
     href: '/admin/assets',
     icon: <BsFillFileEarmarkRichtextFill size={20} />,
   },
+];
+
+const sections: AdminSidebarSectionProps[] = [
   {
-    id: 7,
-    label: 'Locations',
-    href: '/admin/locations',
-    icon: <BsFillGeoFill size={20} />,
+    title: 'Guests',
+    elements: [
+      {
+        label: 'Families',
+        href: '/admin/families',
+        icon: <BsFillPeopleFill size={20} />,
+      },
+      {
+        label: 'People',
+        href: '/admin/people',
+        icon: <BsFillPersonFill size={20} />,
+      },
+      {
+        label: 'Invitations',
+        href: '/admin/invitations',
+        icon: <BsFillEnvelopePaperFill size={20} />,
+      },
+    ],
+  },
+  {
+    title: 'Events',
+    elements: [
+      {
+        label: 'Events',
+        href: '/admin/events',
+        icon: <BsFillCalendarEventFill size={20} />,
+      },
+      {
+        label: 'Locations',
+        href: '/admin/locations',
+        icon: <BsFillGeoFill size={20} />,
+      },
+    ],
   },
 ];
 
@@ -91,10 +107,13 @@ export const AdminSidebar: FC<PropsWithChildren> = ({ children }) => {
           </div>
           <div className="h-4" />
           <ul className="menu flex flex-col p-0 px-4">
-            {elements.map((element) => (
-              <SidebarElement key={element.id} {...element} />
+            {singleElements.map((element) => (
+              <AdminSidebarElement key={element.href} {...element} />
             ))}
           </ul>
+          {sections.map((section) => (
+            <AdminSidebarSection key={section.title} {...section} />
+          ))}
         </aside>
       </div>
     </div>
