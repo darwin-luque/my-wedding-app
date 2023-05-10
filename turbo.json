@@ -20,6 +20,9 @@
     "lint": {
       "outputs": []
     },
+    "lint:fix": {
+      "outputs": ["**/*.ts", "**/*.tsx", "**/*.js"]
+    },
     "clean": {
       "cache": false
     },
