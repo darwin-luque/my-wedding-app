@@ -106,7 +106,7 @@ export const AdminSidebar: FC<PropsWithChildren> = ({ children }) => {
             </Link>
           </div>
           <div className="h-4" />
-          <ul className="menu flex flex-col p-0 px-4">
+          <ul className="menu menu-compact flex flex-col p-0 px-4">
             {singleElements.map((element) => (
               <AdminSidebarElement key={element.href} {...element} />
             ))}
