@@ -1,11 +1,68 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
     provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "sqlite"
+    provider = "postgres"
     url      = env("DATABASE_URL")
+}
+
+model Family {
+    id         String      @id @default(cuid())
+    name       String      @unique
+    createdAt  DateTime    @default(now())
+    updatedAt  DateTime    @updatedAt
+    people     Person[]
+    invitation Invitation?
+}
+
+model Person {
+    id            String     @id @default(cuid())
+    name          String
+    age           Int
+    role          PersonRole @default(NONE)
+    isChildren    Boolean    @default(false)
+    allergies     String?
+    suggestedSong String?
+    family        Family     @relation(fields: [familyId], references: [id])
+    familyId      String
+    createdAt     DateTime   @default(now())
+    updatedAt     DateTime   @updatedAt
+}
+
+model Invitation {
+    id        String   @id @default(cuid())
+    by        Who
+    code      String   @unique @default(cuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    familyId  String   @unique
+    family    Family   @relation(fields: [familyId], references: [id])
+}
+
+enum PersonStatus {
+    IDLE
+    PENDING
+    CONFIRMED
+    REJECTED
+}
+
+enum PersonRole {
+    NONE
+    BEST_MAN
+    MAID_OF_HONOR
+    BRIDESMAID
+    GROOMSMAN
+    FLOWER_GIRL
+    RING_BEARER
+    BRIDES_FATHER
+    GROOMS_FATHER
+    BRIDES_MOTHER
+    GROOMS_MOTHER
+}
+
+enum Who {
+    Bessy
+    Darwin
+    Both
 }
