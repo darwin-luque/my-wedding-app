@@ -30,8 +30,8 @@ export const AdminHeader: FC<HeaderProps> = ({ breadcrumbs = [] }) => {
             appearance={{
               elements: {
                 userButtonAvatarBox: {
-                  height: 48,
-                  width: 48,
+                  height: 40,
+                  width: 40,
                 },
               },
             }}

@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export type IBreadcrumb = {
   label: string;
-  href: string;
+  href: string | null;
   icon: ReactNode;
 };
 
@@ -23,10 +23,17 @@ export const HeaderBreadcrumbs: FC<HeaderBreadcrumbsProps> = ({ items }) => {
         </li>
         {items.map((item) => (
           <li key={item.href}>
-            <Link href={item.href}>
-              {item.icon}
-              {item.label}
-            </Link>
+            {item.href ? (
+              <Link href={item.href}>
+                {item.icon}
+                {item.label}
+              </Link>
+            ) : (
+              <>
+                {item.icon}
+                {item.label}
+              </>
+            )}
           </li>
         ))}
       </ul>
