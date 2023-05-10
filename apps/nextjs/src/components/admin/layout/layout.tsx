@@ -18,5 +18,9 @@ export const AdminLayout: FC<PropsWithChildren> = ({ children }) => {
     return <AdminLayoutLoader />;
   }
 
-  return <AdminSidebar>{children}</AdminSidebar>;
+  return (
+    <AdminSidebar>
+      <div className="overflow-hidden">{children}</div>
+    </AdminSidebar>
+  );
 };
