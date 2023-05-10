@@ -17,7 +17,7 @@ const breadcrumbs: IBreadcrumb[] = [
   },
 ];
 
-const Home: NextPage = () => {
+const AdminFamilies: NextPage = () => {
   return (
     <>
       <Head>
@@ -34,4 +34,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default AdminFamilies;

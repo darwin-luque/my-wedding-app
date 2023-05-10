@@ -17,18 +17,18 @@ createTheme(
       secondary: '#818CF8',
     },
     background: {
-      default: '#0F172A',
+      default: 'rgb(15, 23, 42)',
     },
     context: {
       background: '#0CA5E9',
       text: '#FFFFFF',
     },
     divider: {
-      default: '#F471B5',
+      default: '#454545',
     },
     action: {
       button: 'rgba(0,0,0,.54)',
-      hover: 'rgba(0,0,0,.08)',
+      hover: 'rgba(15, 23, 42,.08)',
       disabled: 'rgba(0,0,0,.12)',
     },
   },

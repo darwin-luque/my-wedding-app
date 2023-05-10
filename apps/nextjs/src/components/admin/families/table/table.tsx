@@ -1,6 +1,6 @@
 import type { TableColumn } from 'react-data-table-component';
+import type { Family, Invitation } from '@prisma/client';
 import { type FC } from 'react';
-import { Family, Invitation } from '@prisma/client';
 import { Empty } from 'antd';
 import { AdminDataTable } from '../../ui/data-table';
 import { trpc } from '../../../../utils/trpc';
@@ -25,6 +25,24 @@ const columns: TableColumn<FamilyRelated>[] = [
   {
     name: 'Members count',
     selector: (row) => row._count.people,
+  },
+  {
+    name: 'Created at',
+    selector: (row) =>
+      new Intl.DateTimeFormat('en-US', {
+        dateStyle: 'medium',
+        timeStyle: 'short',
+        timeZone: 'CST',
+      }).format(new Date(row.createdAt)),
+  },
+  {
+    name: 'Updated at',
+    selector: (row) =>
+      new Intl.DateTimeFormat('en-US', {
+        dateStyle: 'medium',
+        timeStyle: 'short',
+        timeZone: 'CST',
+      }).format(new Date(row.updatedAt)),
   },
 ];
 

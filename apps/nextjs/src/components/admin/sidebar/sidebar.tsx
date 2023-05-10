@@ -8,7 +8,6 @@ import {
   BsFillFileEarmarkRichtextFill,
   BsFillPersonFill,
 } from 'react-icons/bs';
-import Link from 'next/link';
 import { FC, PropsWithChildren } from 'react';
 import { AdminLogo } from '../logo';
 import { AdminSidebarElement, AdminSidebarElementProps } from './element';
@@ -96,14 +95,9 @@ export const AdminSidebar: FC<PropsWithChildren> = ({ children }) => {
         <label htmlFor="drawer" className="drawer-overlay" />
         <aside className="w-80 bg-base-200">
           <div className="sticky top-0 z-20 hidden items-center justify-center gap-2 bg-base-200 bg-opacity-90 px-4 py-2 backdrop-blur lg:flex">
-            <Link
-              href="/"
-              aria-current="page"
-              aria-label="Homepage"
-              className="flex-0 btn-ghost btn h-fit px-2"
-            >
+            <div className="flex-0 btn-ghost btn h-fit px-2">
               <AdminLogo />
-            </Link>
+            </div>
           </div>
           <div className="h-4" />
           <ul className="menu menu-compact flex flex-col p-0 px-4">

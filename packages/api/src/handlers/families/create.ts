@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { protectedProcedure } from '../../trpc';
+import { publicProcedure } from '../../trpc';
 
-export const createFamilyHandler = protectedProcedure
+export const createFamilyHandler = publicProcedure // temp
   .input(
     z.object({
       name: z.string(),

@@ -10,7 +10,12 @@ const parisienne = Parisienne({
 
 export const AdminLogo: FC = () => (
   <div className="my-4 items-center justify-center capitalize">
-    <Link href="/admin" className="items-center justify-center ">
+    <Link
+      href="/admin"
+      className="items-center justify-center "
+      aria-current="page"
+      aria-label="Homepage"
+    >
       <h1 className={`${parisienne.className} w-full text-center text-3xl`}>
         Wedding
       </h1>
