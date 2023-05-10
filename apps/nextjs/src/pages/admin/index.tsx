@@ -1,5 +1,15 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { Header } from '../../components/admin/header';
+import { IBreadcrumb } from '../../components/admin/header/breadcrumbs';
+
+const breadcrumbs: IBreadcrumb[] = [
+  {
+    label: 'Dashboard',
+    href: '/admin',
+    icon: null,
+  },
+];
 
 const Home: NextPage = () => {
   return (
@@ -8,9 +18,12 @@ const Home: NextPage = () => {
         <title>Bessy & Darwin Wedding&apos;s Platform</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex h-screen flex-col items-center">
-        <h1>My Wedding Platform</h1>
-      </main>
+      <>
+        <Header breadcrumbs={breadcrumbs} />
+        <main className="flex h-screen flex-col items-center">
+          <h1>My Wedding Platform</h1>
+        </main>
+      </>
     </>
   );
 };
