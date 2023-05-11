@@ -3,6 +3,7 @@ import { type FC } from 'react';
 import { AdminDataTable } from '../../ui/data-table';
 import { ColumnsType } from 'antd/es/table';
 import { Tag } from 'antd';
+import { useRouter } from 'next/router';
 
 type FamilyRelated = Family & {
   invitation: Invitation | null;
@@ -80,5 +81,12 @@ const columns: ColumnsType<FamilyRelated> = [
 ];
 
 export const AdminFamiliesTable: FC<AdminFamiliesTableProps> = ({ data }) => {
-  return <AdminDataTable dataSource={data} columns={columns} />;
+  const router = useRouter();
+  return (
+    <AdminDataTable
+      dataSource={data}
+      columns={columns}
+      onCreate={() => router.push('/admin/families/create')}
+    />
+  );
 };
