@@ -1,10 +1,8 @@
-import type { TableColumn } from 'react-data-table-component';
 import type { Family, Invitation } from '@prisma/client';
 import { type FC } from 'react';
-import { Empty } from 'antd';
 import { AdminDataTable } from '../../ui/data-table';
-import { trpc } from '../../../../utils/trpc';
-import { useRouter } from 'next/router';
+import { ColumnsType } from 'antd/es/table';
+import { Tag } from 'antd';
 
 type FamilyRelated = Family & {
   invitation: Invitation | null;
@@ -13,60 +11,74 @@ type FamilyRelated = Family & {
   };
 };
 
-const columns: TableColumn<FamilyRelated>[] = [
+export type AdminFamiliesTableProps = {
+  data: FamilyRelated[];
+};
+
+const columns: ColumnsType<FamilyRelated> = [
   {
-    name: 'Name',
-    selector: (row) => row.name,
+    title: 'Name',
+    dataIndex: 'name',
+    key: 'name',
+    width: 200,
   },
   {
-    name: 'Invitation',
-    selector: (row) => row.invitation?.code ?? 'No invitation yet',
+    title: 'Invitation',
+    dataIndex: 'invitation',
+    key: 'invitation',
+    width: 200,
+    render: (invitation) => (
+      <div className="flex flex-col">
+        <span>{invitation?.code ?? 'No Invitation Yet'}</span>
+      </div>
+    ),
   },
   {
-    name: 'Members count',
-    selector: (row) => row._count.people,
+    title: 'Members count',
+    dataIndex: '_count',
+    key: '_count',
+    width: 150,
+    render: (count) => {
+      const color = count.people > 5 ? 'geekblue' : 'green';
+      return <Tag color={color}>{count.people}</Tag>;
+    },
   },
   {
-    name: 'Created at',
-    selector: (row) =>
-      new Intl.DateTimeFormat('en-US', {
+    title: 'Created at',
+    dataIndex: 'createdAt',
+    key: 'createdAt',
+    render: (createdAt) => {
+      const date = new Intl.DateTimeFormat('en-US', {
         dateStyle: 'medium',
         timeStyle: 'short',
         timeZone: 'CST',
-      }).format(new Date(row.createdAt)),
+      }).format(new Date(createdAt));
+      return (
+        <div className="flex flex-col">
+          <span>{date}</span>
+        </div>
+      );
+    },
   },
   {
-    name: 'Updated at',
-    selector: (row) =>
-      new Intl.DateTimeFormat('en-US', {
+    title: 'Updated at',
+    dataIndex: 'updatedAt',
+    key: 'updatedAt',
+    render: (updatedAt) => {
+      const date = new Intl.DateTimeFormat('en-US', {
         dateStyle: 'medium',
         timeStyle: 'short',
         timeZone: 'CST',
-      }).format(new Date(row.updatedAt)),
+      }).format(new Date(updatedAt));
+      return (
+        <div className="flex flex-col">
+          <span>{date}</span>
+        </div>
+      );
+    },
   },
 ];
 
-export const AdminFamiliesTable: FC = () => {
-  const router = useRouter();
-  const { data } = trpc.families.list.useQuery();
-
-  return (
-    <AdminDataTable
-      data={data ?? []}
-      columns={columns}
-      theme="solarized"
-      pagination
-      highlightOnHover
-      selectableRows
-      noDataComponent={
-        <div className="py-5">
-          <Empty
-            imageStyle={{ height: 60 }}
-            description={<span className="text-white">No Families</span>}
-          />
-        </div>
-      }
-      onCreate={() => router.push('/admin/families/create')}
-    />
-  );
+export const AdminFamiliesTable: FC<AdminFamiliesTableProps> = ({ data }) => {
+  return <AdminDataTable dataSource={data} columns={columns} />;
 };

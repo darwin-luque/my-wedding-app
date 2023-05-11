@@ -1,53 +1,55 @@
-import { useCallback, useMemo, useState } from 'react';
-import DataTable, { TableProps } from 'react-data-table-component';
-import { TableToolkit } from './table-toolkit';
+import { FaPen, FaPlus, FaTrash } from 'react-icons/fa';
+import type { TableProps } from 'antd/es/table';
+import { Table, TableColumnType } from 'antd';
 
 export type AdminDataTable<T> = TableProps<T> & {
-  onDelete?: (rows: T[]) => void;
+  onDelete?: (rows: T) => void;
   onUpdate?: (row: T) => void;
   onCreate?: () => void;
 };
 
-export const AdminDataTable = <T,>(props: AdminDataTable<T>): JSX.Element => {
+export const AdminDataTable = <T extends object>(
+  props: AdminDataTable<T>,
+): JSX.Element => {
   const { onDelete, onUpdate, onCreate, ...rest } = props;
-  const [selectedRows, setSelectedRows] = useState<T[]>([]);
-  const [toggleCleared, setToggleCleared] = useState(false);
-  const handleRowSelected = useCallback((state: { selectedRows: T[] }) => {
-    setSelectedRows(state.selectedRows);
-  }, []);
 
-  const contextActions = useMemo(() => {
-    const handleDelete = () => {
-      if (
-        window.confirm('Are you sure you want to delete the selected rows? ')
-      ) {
-        setToggleCleared(!toggleCleared);
-        onDelete?.(selectedRows);
-      }
-    };
-
-    return (
-      <button key="delete" onClick={handleDelete} className="btn-danger btn">
-        Delete
-      </button>
-    );
-  }, [onDelete, selectedRows, toggleCleared]);
+  const actionColumn: TableColumnType<T> = {
+    title: 'Actions',
+    key: 'actions',
+    render: (_, record) => (
+      <div className="flex gap-2">
+        <button
+          onClick={() => onUpdate?.(record)}
+          className="btn-ghost btn-xs btn gap-2"
+        >
+          <FaPen className="text-blue-500" />
+          <span className="text-blue-500">Edit</span>
+        </button>
+        <button
+          onClick={() => onDelete?.(record)}
+          className="btn-ghost btn-xs btn gap-2"
+        >
+          <FaTrash className="text-red-500" />
+          <span className="text-red-500">Delete</span>
+        </button>
+      </div>
+    ),
+  };
 
   return (
-    <>
-      <TableToolkit
-        selectedRows={selectedRows}
-        onDelete={onDelete}
-        onUpdate={onUpdate}
-        onCreate={onCreate}
-      />
-      <DataTable
-        {...rest}
-        contextActions={contextActions}
-        onSelectedRowsChange={handleRowSelected}
-        clearSelectedRows={toggleCleared}
-        noHeader
-      />
-    </>
+    <Table
+      {...rest}
+      columns={[...(rest.columns ?? []), actionColumn]}
+      size="large"
+      tableLayout="fixed"
+      title={() => (
+        <div>
+          <button onClick={onCreate} className="btn-ghost btn gap-2">
+            <FaPlus className="text-green-500" />
+            <span className="text-green-500">Create</span>
+          </button>
+        </div>
+      )}
+    />
   );
 };

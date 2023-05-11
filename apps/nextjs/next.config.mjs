@@ -14,6 +14,14 @@ const config = {
   eslint: {
     ignoreDuringBuilds: !!process.env.CI,
   },
+  experimental: {
+    fontLoaders: [
+      { loader: 'next/font/google', options: { subsets: ['latin'] } },
+    ],
+  },
+  images: {
+    domains: ['lh3.googleusercontent.com']
+  }
 };
 
 export default config;

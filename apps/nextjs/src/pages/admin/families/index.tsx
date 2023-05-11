@@ -3,6 +3,7 @@ import type { NextPage } from 'next';
 import { AdminFamiliesTable } from '../../../components/admin/families/table';
 import { IBreadcrumb } from '../../../components/admin/header/breadcrumbs';
 import { AdminHeader } from '../../../components/admin/header';
+import { trpc } from '../../../utils/trpc';
 
 const breadcrumbs: IBreadcrumb[] = [
   {
@@ -18,6 +19,8 @@ const breadcrumbs: IBreadcrumb[] = [
 ];
 
 const AdminFamilies: NextPage = () => {
+  const { data } = trpc.families.list.useQuery();
+
   return (
     <>
       <Head>
@@ -27,7 +30,7 @@ const AdminFamilies: NextPage = () => {
       <>
         <AdminHeader breadcrumbs={breadcrumbs} />
         <main className="flex h-screen flex-col items-center">
-          <AdminFamiliesTable />
+          <AdminFamiliesTable data={data ?? []} />
         </main>
       </>
     </>

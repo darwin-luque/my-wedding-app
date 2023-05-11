@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { Parisienne } from '@next/font/google';
+import { Parisienne } from 'next/font/google';
 import Link from 'next/link';
 
 const parisienne = Parisienne({
