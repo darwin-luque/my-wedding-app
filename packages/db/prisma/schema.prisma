@@ -20,7 +20,7 @@ model Person {
     id            String       @id @default(cuid())
     name          String
     role          PersonRole   @default(NONE)
-    isChildren    Boolean      @default(false)
+    isChild       Boolean      @default(false)
     status        PersonStatus @default(IDLE)
     allergies     String?
     suggestedSong String?

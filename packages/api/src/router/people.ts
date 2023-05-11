@@ -20,7 +20,7 @@ export const peopleRouter = router({
           PersonRole.RING_BEARER,
           PersonRole.NONE,
         ]),
-        isChildren: z.boolean(),
+        isChild: z.boolean(),
         familyId: z.string(),
       }),
     )

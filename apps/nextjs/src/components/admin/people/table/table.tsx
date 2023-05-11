@@ -10,6 +10,7 @@ import { Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { AdminDataTable } from '../../ui/data-table';
 import { readableRole } from '../../../../utils/readable-role';
+import { useRouter } from 'next/router';
 
 export type PersonRelated = Person & {
   family: Family & {
@@ -102,5 +103,12 @@ const columns: ColumnsType<PersonRelated> = [
 ];
 
 export const AdminPeopleTable: FC<AdminPeopleTableProps> = ({ data }) => {
-  return <AdminDataTable dataSource={data} columns={columns} />;
+  const router = useRouter();
+  return (
+    <AdminDataTable
+      dataSource={data}
+      columns={columns}
+      onCreate={() => router.push('/admin/people/create')}
+    />
+  );
 };
