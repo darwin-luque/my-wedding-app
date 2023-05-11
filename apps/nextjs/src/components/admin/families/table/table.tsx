@@ -1,9 +1,9 @@
 import type { Family, Invitation } from '@prisma/client';
-import { type FC } from 'react';
-import { AdminDataTable } from '../../ui/data-table';
-import { ColumnsType } from 'antd/es/table';
-import { Tag } from 'antd';
+import type { ColumnsType } from 'antd/es/table';
 import { useRouter } from 'next/router';
+import { type FC } from 'react';
+import { Tag } from 'antd';
+import { AdminDataTable } from '../../ui/data-table';
 
 type FamilyRelated = Family & {
   invitation: Invitation | null;
