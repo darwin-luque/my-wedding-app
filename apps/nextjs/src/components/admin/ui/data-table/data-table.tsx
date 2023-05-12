@@ -1,3 +1,4 @@
+import { BsFillInboxFill } from 'react-icons/bs';
 import { FaPen, FaPlus, FaTrash } from 'react-icons/fa';
 
 export type ColumnType<T> = {
@@ -68,6 +69,16 @@ export const AdminDataTable = <T,>(props: AdminDataTable<T>): JSX.Element => {
           </tr>
         </thead>
         <tbody>
+          {rest.data.length === 0 && (
+            <tr>
+              <td colSpan={allColumns.length} className="p-0">
+                <div className="flex w-full flex-col items-center pt-5">
+                  <BsFillInboxFill size={42} />
+                  <p>No data</p>
+                </div>
+              </td>
+            </tr>
+          )}
           {rest.data.map((row, index) => (
             <tr key={index}>
               {allColumns.map((column) => (
