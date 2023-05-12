@@ -1,6 +1,6 @@
 import { FieldErrors, useForm } from 'react-hook-form';
-import { Popconfirm } from 'antd';
 import { FC } from 'react';
+import { AdminConfirmModal } from '../../ui/confirm-modal';
 
 export type FormValues = {
   name: string;
@@ -28,18 +28,12 @@ export const AdminFamilyCreateForm: FC<AdminFamilyCreateFormProps> = ({
   onInvalid,
 }) => {
   const {
-    reset,
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver });
 
   const onSubmit = handleSubmit(onSave, onInvalid);
-
-  const onConfirm = async () => {
-    await onSubmit();
-    reset();
-  };
 
   return (
     <form className="w-[90%] px-10" onSubmit={(e) => e.preventDefault()}>
@@ -59,17 +53,18 @@ export const AdminFamilyCreateForm: FC<AdminFamilyCreateFormProps> = ({
           </label>
         )}
       </div>
-      <Popconfirm
-        title="Create the family?"
-        description="Are you sure to create this family?"
-        onConfirm={onConfirm}
-        okText="Yes"
-        okButtonProps={{ className: 'btn-success' }}
+      <a
+        href="#create-family-modal"
+        className="btn-success btn mt-10 rounded-lg capitalize"
       >
-        <button className="btn-success btn mt-10 rounded-lg capitalize">
-          Publish
-        </button>
-      </Popconfirm>
+        Publish
+      </a>
+      <AdminConfirmModal
+        id="create-family-modal"
+        onConfirm={onSubmit}
+        title="Are you sure you want to create this family?"
+        description="Confirm that you want to create this family. You can edit and delete the family further on."
+      />
     </form>
   );
 };

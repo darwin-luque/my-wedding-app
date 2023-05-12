@@ -1,9 +1,7 @@
 import type { Family, Invitation } from '@prisma/client';
-import type { ColumnsType } from 'antd/es/table';
 import { useRouter } from 'next/router';
 import { type FC } from 'react';
-import { Tag } from 'antd';
-import { AdminDataTable } from '../../ui/data-table';
+import { AdminDataTable, type ColumnsType } from '../../ui/data-table';
 
 type FamilyRelated = Family & {
   invitation: Invitation | null;
@@ -28,7 +26,7 @@ const columns: ColumnsType<FamilyRelated> = [
     dataIndex: 'invitation',
     key: 'invitation',
     width: 200,
-    render: (invitation) => (
+    render: (invitation: Invitation) => (
       <div className="flex flex-col">
         <span>{invitation?.code ?? 'No Invitation Yet'}</span>
       </div>
@@ -39,16 +37,22 @@ const columns: ColumnsType<FamilyRelated> = [
     dataIndex: '_count',
     key: '_count',
     width: 150,
-    render: (count) => {
-      const color = count.people > 5 ? 'geekblue' : 'green';
-      return <Tag color={color}>{count.people}</Tag>;
+    render: (count: FamilyRelated['_count']) => {
+      const className = count.people > 5 ? 'badge-primary' : 'badge-secondary';
+      return (
+        <div className="flex flex-col items-center">
+          <div className={`badge-outline badge ${className}`}>
+            {count.people}
+          </div>
+        </div>
+      );
     },
   },
   {
     title: 'Created at',
     dataIndex: 'createdAt',
     key: 'createdAt',
-    render: (createdAt) => {
+    render: (createdAt: Date) => {
       const date = new Intl.DateTimeFormat('en-US', {
         dateStyle: 'medium',
         timeStyle: 'short',
@@ -65,7 +69,7 @@ const columns: ColumnsType<FamilyRelated> = [
     title: 'Updated at',
     dataIndex: 'updatedAt',
     key: 'updatedAt',
-    render: (updatedAt) => {
+    render: (updatedAt: Date) => {
       const date = new Intl.DateTimeFormat('en-US', {
         dateStyle: 'medium',
         timeStyle: 'short',
@@ -83,8 +87,8 @@ const columns: ColumnsType<FamilyRelated> = [
 export const AdminFamiliesTable: FC<AdminFamiliesTableProps> = ({ data }) => {
   const router = useRouter();
   return (
-    <AdminDataTable
-      dataSource={data}
+    <AdminDataTable<FamilyRelated>
+      data={data}
       columns={columns}
       onCreate={() => router.push('/admin/families/create')}
     />

@@ -1,19 +1,27 @@
 import { FaPen, FaPlus, FaTrash } from 'react-icons/fa';
-import type { TableProps } from 'antd/es/table';
-import { Table, TableColumnType } from 'antd';
 
-export type AdminDataTable<T> = TableProps<T> & {
+export type ColumnType<T> = {
+  title: string;
+  dataIndex?: keyof T;
+  key: string;
+  width?: number;
+  render?: (value: any, record: T, index: number) => JSX.Element;
+};
+
+export type ColumnsType<T> = ColumnType<T>[];
+
+export type AdminDataTable<T> = {
+  data: T[];
+  columns: ColumnsType<T>;
   onDelete?: (rows: T) => void;
   onUpdate?: (row: T) => void;
   onCreate?: () => void;
 };
 
-export const AdminDataTable = <T extends object>(
-  props: AdminDataTable<T>,
-): JSX.Element => {
+export const AdminDataTable = <T,>(props: AdminDataTable<T>): JSX.Element => {
   const { onDelete, onUpdate, onCreate, ...rest } = props;
 
-  const actionColumn: TableColumnType<T> = {
+  const actionColumn: ColumnType<T> = {
     title: 'Actions',
     key: 'actions',
     render: (_, record) => (
@@ -36,20 +44,45 @@ export const AdminDataTable = <T extends object>(
     ),
   };
 
+  const allColumns = [...rest.columns, actionColumn];
+
   return (
-    <Table
-      {...rest}
-      columns={[...(rest.columns ?? []), actionColumn]}
-      size="large"
-      tableLayout="fixed"
-      title={() => (
-        <div>
-          <button onClick={onCreate} className="btn-ghost btn gap-2">
-            <FaPlus className="text-green-500" />
-            <span className="text-green-500">Create</span>
-          </button>
-        </div>
-      )}
-    />
+    <div className="w-full overflow-x-auto">
+      <div className="w-full">
+        <button
+          onClick={onCreate}
+          className="btn-ghost btn-sm btn ml-4 mb-1 items-center gap-1 text-sm"
+        >
+          <FaPlus className="text-green-500" size={12} />
+          <span className="text-green-500">Create</span>
+        </button>
+      </div>
+      <table className="table w-full text-sm">
+        <thead>
+          <tr>
+            {allColumns.map((column) => (
+              <th key={column.key} style={{ width: column.width }}>
+                {column.title}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rest.data.map((row, index) => (
+            <tr key={index}>
+              {allColumns.map((column) => (
+                <td key={column.key} style={{ width: column.width }}>
+                  {column.render?.(
+                    column.dataIndex ? row[column.dataIndex] : undefined,
+                    row,
+                    index,
+                  ) ?? String(column.dataIndex ? row[column.dataIndex] : '')}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };

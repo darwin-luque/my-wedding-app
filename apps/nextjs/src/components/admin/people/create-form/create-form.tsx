@@ -1,6 +1,6 @@
 import { FieldErrors, useForm } from 'react-hook-form';
+import Popconfirm from 'antd/es/popconfirm';
 import { FC } from 'react';
-import { Popconfirm } from 'antd';
 import { trpc } from '../../../../utils/trpc';
 
 export type FormValues = {

@@ -5,12 +5,10 @@ import {
   type PersonRole,
   type Invitation,
 } from '@acme/db';
-import { FC } from 'react';
-import { Tag } from 'antd';
-import type { ColumnsType } from 'antd/es/table';
-import { AdminDataTable } from '../../ui/data-table';
-import { readableRole } from '../../../../utils/readable-role';
+import type { FC } from 'react';
 import { useRouter } from 'next/router';
+import { readableRole } from '../../../../utils/readable-role';
+import { AdminDataTable, ColumnsType } from '../../ui/data-table';
 
 export type PersonRelated = Person & {
   family: Family & {
@@ -49,20 +47,20 @@ const columns: ColumnsType<PersonRelated> = [
     key: 'status',
     width: 150,
     render: (status: PersonStatus) => {
-      let color = 'geekblue';
+      let className = '';
       if (status === 'PENDING') {
-        color = 'gold';
+        className = 'badge-primary';
       }
       if (status === 'REJECTED') {
-        color = 'volcano';
+        className = 'badge-accent';
       }
       if (status === 'CONFIRMED') {
-        color = 'green';
+        className = 'badge-secondary';
       }
       return (
-        <Tag color={color} key={status}>
-          {status}
-        </Tag>
+        <div className="flex flex-col items-center">
+          <div className={`badge-outline badge ${className}`}>{status}</div>
+        </div>
       );
     },
   },
@@ -105,8 +103,8 @@ const columns: ColumnsType<PersonRelated> = [
 export const AdminPeopleTable: FC<AdminPeopleTableProps> = ({ data }) => {
   const router = useRouter();
   return (
-    <AdminDataTable
-      dataSource={data}
+    <AdminDataTable<PersonRelated>
+      data={data}
       columns={columns}
       onCreate={() => router.push('/admin/people/create')}
     />
