@@ -1,13 +1,13 @@
 import { FieldErrors, useForm } from 'react-hook-form';
-import Popconfirm from 'antd/es/popconfirm';
-import { FC } from 'react';
+import type { FC } from 'react';
 import { trpc } from '../../../../utils/trpc';
+import { AdminConfirmModal } from '../../ui/confirm-modal';
 
 export type FormValues = {
   name: string;
   role: string;
   isChild: boolean;
-  familyId: string;
+  personId: string;
 };
 
 export type AdminPeopleCreateFormProps = {
@@ -24,8 +24,8 @@ const resolver = (values: FormValues) => ({
         message: 'Name is required',
       },
     }),
-    ...(!values.familyId && {
-      familyId: {
+    ...(!values.personId && {
+      personId: {
         type: 'required',
         message: 'Family is required',
       },
@@ -39,7 +39,6 @@ export const AdminPeopleCreateForm: FC<AdminPeopleCreateFormProps> = ({
 }) => {
   const { data: families } = trpc.families.list.useQuery();
   const {
-    reset,
     register,
     handleSubmit,
     formState: { errors },
@@ -52,11 +51,6 @@ export const AdminPeopleCreateForm: FC<AdminPeopleCreateFormProps> = ({
   });
 
   const onSubmit = handleSubmit(onSave, onInvalid);
-
-  const onConfirm = async () => {
-    await onSubmit();
-    reset();
-  };
 
   return (
     <form className="w-[90%] px-10" onSubmit={(e) => e.preventDefault()}>
@@ -78,22 +72,22 @@ export const AdminPeopleCreateForm: FC<AdminPeopleCreateFormProps> = ({
       </div>
       <div className="form-control w-full max-w-md">
         <label className="label">
-          <span className="label-text">What is the family&apos;s name?</span>
+          <span className="label-text">What is the person&apos;s name?</span>
         </label>
         <select
           className="select-bordered select w-full"
-          {...register('familyId')}
+          {...register('personId')}
         >
-          {families?.map((family) => (
-            <option key={family.id} value={family.id}>
-              {family.name}
+          {families?.map((person) => (
+            <option key={person.id} value={person.id}>
+              {person.name}
             </option>
           ))}
         </select>
       </div>
       <div className="form-control w-full max-w-md">
         <label className="label">
-          <span className="label-text">What is the family&apos;s name?</span>
+          <span className="label-text">What is the person&apos;s name?</span>
         </label>
         <select
           className="select-bordered select w-full"
@@ -129,17 +123,18 @@ export const AdminPeopleCreateForm: FC<AdminPeopleCreateFormProps> = ({
           />
         </label>
       </div>
-      <Popconfirm
-        title="Create the family?"
-        description="Are you sure to create this family?"
-        onConfirm={onConfirm}
-        okText="Yes"
-        okButtonProps={{ className: 'btn-success' }}
+      <a
+        href="#create-person-modal"
+        className="btn-success btn mt-10 rounded-lg capitalize"
       >
-        <button className="btn-success btn mt-10 rounded-lg capitalize">
-          Publish
-        </button>
-      </Popconfirm>
+        Publish
+      </a>
+      <AdminConfirmModal
+        id="create-person-modal"
+        onConfirm={onSubmit}
+        title="Are you sure you want to create this person?"
+        description="Confirm that you want to create this person. You can edit and delete the person further on."
+      />
     </form>
   );
 };
