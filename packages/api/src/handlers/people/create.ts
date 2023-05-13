@@ -11,11 +11,19 @@ export const createPersonHandler = publicProcedure
       familyId: z.string(),
     }),
   )
-  .mutation(({ ctx, input }) => {
+  .mutation(async ({ ctx, input }) => {
+    // check if family already has an invitation
+    const invitation = await ctx.prisma.invitation.findUnique({
+      where: {
+        familyId: input.familyId,
+      },
+    });
+
     return ctx.prisma.person.create({
       data: {
         ...input,
         role: stringToPersonRole(input.role),
+        status: !!invitation ? 'PENDING' : 'IDLE',
       },
       include: {
         family: true,

@@ -9,8 +9,9 @@ export const createInvitationHandler = publicProcedure
       familyId: z.string(),
     }),
   )
-  .mutation(({ ctx, input }) => {
-    return ctx.prisma.invitation.create({
+  .mutation(async ({ ctx, input }) => {
+    // create the invitation
+    const invitation = await ctx.prisma.invitation.create({
       data: {
         ...input,
         by: stringToWho(input.by),
@@ -19,4 +20,16 @@ export const createInvitationHandler = publicProcedure
         family: true,
       },
     });
+
+    // update the family's members' status
+    await ctx.prisma.person.updateMany({
+      where: {
+        familyId: input.familyId,
+      },
+      data: {
+        status: 'PENDING',
+      },
+    });
+
+    return invitation;
   });

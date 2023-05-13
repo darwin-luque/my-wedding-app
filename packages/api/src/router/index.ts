@@ -5,7 +5,7 @@ import { invitationsRouter } from './invitation';
 import { peopleRouter } from './people';
 
 export const appRouter = router({
-  invitation: invitationsRouter,
+  invitations: invitationsRouter,
   families: familiesRouter,
   people: peopleRouter,
   auth: authRouter,
