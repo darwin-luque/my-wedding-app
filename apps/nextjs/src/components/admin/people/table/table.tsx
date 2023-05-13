@@ -25,7 +25,7 @@ const columns: ColumnsType<PersonRelated> = [
     title: 'Name',
     dataIndex: 'name',
     key: 'name',
-    width: 200,
+    width: 150,
   },
   {
     title: 'Role',
@@ -45,7 +45,7 @@ const columns: ColumnsType<PersonRelated> = [
     title: 'Status',
     dataIndex: 'status',
     key: 'status',
-    width: 150,
+    width: 100,
     render: (status: PersonStatus) => {
       let className = '';
       if (status === 'PENDING') {
@@ -58,7 +58,7 @@ const columns: ColumnsType<PersonRelated> = [
         className = 'badge-secondary';
       }
       return (
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center justify-center">
           <div className={`badge-outline badge ${className}`}>{status}</div>
         </div>
       );
@@ -68,6 +68,7 @@ const columns: ColumnsType<PersonRelated> = [
     title: 'Created at',
     dataIndex: 'createdAt',
     key: 'createdAt',
+    width: 200,
     render: (createdAt) => {
       const date = new Intl.DateTimeFormat('en-US', {
         dateStyle: 'medium',
@@ -85,6 +86,7 @@ const columns: ColumnsType<PersonRelated> = [
     title: 'Updated at',
     dataIndex: 'updatedAt',
     key: 'updatedAt',
+    width: 200,
     render: (updatedAt) => {
       const date = new Intl.DateTimeFormat('en-US', {
         dateStyle: 'medium',

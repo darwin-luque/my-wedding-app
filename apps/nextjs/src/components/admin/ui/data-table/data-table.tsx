@@ -26,7 +26,7 @@ export const AdminDataTable = <T,>(props: AdminDataTable<T>): JSX.Element => {
     title: 'Actions',
     key: 'actions',
     render: (_, record) => (
-      <div className="flex gap-2">
+      <div className="flex justify-center gap-2">
         <button
           onClick={() => onUpdate?.(record)}
           className="btn-ghost btn-xs btn gap-2"
@@ -62,7 +62,11 @@ export const AdminDataTable = <T,>(props: AdminDataTable<T>): JSX.Element => {
         <thead>
           <tr>
             {allColumns.map((column) => (
-              <th key={column.key} style={{ width: column.width }}>
+              <th
+                className="text-center"
+                key={column.key}
+                style={{ width: column.width }}
+              >
                 {column.title}
               </th>
             ))}
@@ -82,7 +86,11 @@ export const AdminDataTable = <T,>(props: AdminDataTable<T>): JSX.Element => {
           {rest.data.map((row, index) => (
             <tr key={index}>
               {allColumns.map((column) => (
-                <td key={column.key} style={{ width: column.width }}>
+                <td
+                  className="text-center"
+                  key={column.key}
+                  style={{ width: column.width }}
+                >
                   {column.render?.(
                     column.dataIndex ? row[column.dataIndex] : undefined,
                     row,

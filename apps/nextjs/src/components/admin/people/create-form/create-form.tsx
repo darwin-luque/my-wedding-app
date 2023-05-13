@@ -7,7 +7,7 @@ export type FormValues = {
   name: string;
   role: string;
   isChild: boolean;
-  personId: string;
+  familyId: string;
 };
 
 export type AdminPeopleCreateFormProps = {
@@ -24,8 +24,8 @@ const resolver = (values: FormValues) => ({
         message: 'Name is required',
       },
     }),
-    ...(!values.personId && {
-      personId: {
+    ...(!values.familyId && {
+      familyId: {
         type: 'required',
         message: 'Family is required',
       },
@@ -76,7 +76,7 @@ export const AdminPeopleCreateForm: FC<AdminPeopleCreateFormProps> = ({
         </label>
         <select
           className="select-bordered select w-full"
-          {...register('personId')}
+          {...register('familyId')}
         >
           {families?.map((person) => (
             <option key={person.id} value={person.id}>
@@ -115,12 +115,7 @@ export const AdminPeopleCreateForm: FC<AdminPeopleCreateFormProps> = ({
       <div className="form-control w-fit">
         <label className="label cursor-pointer gap-4">
           <span className="label-text">Is Child?</span>
-          <input
-            {...register('isChild')}
-            type="checkbox"
-            className="toggle"
-            checked
-          />
+          <input {...register('isChild')} type="checkbox" className="toggle" />
         </label>
       </div>
       <a

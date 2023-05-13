@@ -24,12 +24,12 @@ const breadcrumbs: IBreadcrumb[] = [
   },
 ];
 
-const AdminCreateFamily: NextPage = () => {
+const AdminCreatePerson: NextPage = () => {
   const router = useRouter();
 
-  const createFamily = trpc.families.create.useMutation({
+  const createPerson = trpc.people.create.useMutation({
     onSuccess: () => {
-      router.push('/admin/families');
+      router.push('/admin/people');
     },
   });
 
@@ -40,15 +40,15 @@ const AdminCreateFamily: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Bessy & Darwin Wedding&apos;s Platform - Create Family</title>
+        <title>Bessy & Darwin Wedding&apos;s Platform - Create Person</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <>
         <AdminHeader breadcrumbs={breadcrumbs} />
         <main className="flex h-screen flex-col items-center">
-          <h1 className="prose text-xl font-bold">Create a Family</h1>
+          <h1 className="prose text-xl font-bold">Create a Person</h1>
           <AdminPeopleCreateForm
-            onSave={createFamily.mutate}
+            onSave={createPerson.mutate}
             onInvalid={onInvalid}
           />
         </main>
@@ -57,4 +57,4 @@ const AdminCreateFamily: NextPage = () => {
   );
 };
 
-export default AdminCreateFamily;
+export default AdminCreatePerson;
