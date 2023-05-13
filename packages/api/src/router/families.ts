@@ -1,4 +1,5 @@
-import { createFamilyHandler, listFamiliesHandler } from '../handlers/families';
+import { createFamilyHandler } from '../handlers/families/create';
+import { listFamiliesHandler } from '../handlers/families/list';
 import { router } from '../trpc';
 
 export const familiesRouter = router({
