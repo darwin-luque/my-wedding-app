@@ -6,14 +6,18 @@ export const createEventHandler = publicProcedure
     z.object({
       name: z.string(),
       description: z.string(),
-      startsAt: z.date(),
-      endsAt: z.date(),
+      startsAt: z.string(),
+      endsAt: z.string(),
       googleMapsUrl: z.string(),
       pictures: z.array(z.string()),
     }),
   )
   .mutation(({ ctx, input }) => {
     return ctx.prisma.event.create({
-      data: input,
+      data: {
+        ...input,
+        endsAt: new Date(input.endsAt),
+        startsAt: new Date(input.startsAt),
+      },
     });
   });

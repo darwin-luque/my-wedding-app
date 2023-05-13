@@ -37,7 +37,7 @@ export const AdminSelectAssetsModal: FC<AdminSelectAssetsModalProps> = ({
   const selectAssetHandler = (url: string, selected: boolean) => {
     setSelectedAssetUrls((prev) =>
       selected
-        ? prev.filter((url) => url !== url)
+        ? prev.filter((prevUrl) => prevUrl !== url)
         : multiple
         ? [...prev, url]
         : [url],

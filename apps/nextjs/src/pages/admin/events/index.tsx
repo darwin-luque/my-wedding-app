@@ -13,7 +13,7 @@ const breadcrumbs: IBreadcrumb[] = [
   },
 ];
 
-const AdminFamilies: NextPage = () => {
+const AdminEvents: NextPage = () => {
   const { data } = trpc.events.list.useQuery();
 
   return (
@@ -33,4 +33,4 @@ const AdminFamilies: NextPage = () => {
   );
 };
 
-export default AdminFamilies;
+export default AdminEvents;
