@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import type { FC } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { UserButton } from '@clerk/nextjs';
 import { HeaderBreadcrumbs, IBreadcrumb } from './breadcrumbs';

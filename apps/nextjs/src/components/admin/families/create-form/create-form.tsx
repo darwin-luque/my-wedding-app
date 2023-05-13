@@ -1,5 +1,5 @@
 import { FieldErrors, useForm } from 'react-hook-form';
-import { FC } from 'react';
+import type { FC } from 'react';
 import { AdminConfirmModal } from '../../ui/confirm-modal';
 
 export type FormValues = {

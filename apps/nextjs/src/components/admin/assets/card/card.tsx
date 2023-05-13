@@ -1,6 +1,6 @@
 import type { Asset } from '@acme/db';
 import Image from 'next/image';
-import { FC } from 'react';
+import type { FC } from 'react';
 import { FaPen, FaTrash } from 'react-icons/fa';
 
 export type AdminAssetCardProps = {

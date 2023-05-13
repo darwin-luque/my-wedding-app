@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import type { FC } from 'react';
 
 export const AdminLayoutLoader: FC = () => (
   <div className="flex h-screen w-screen items-center justify-center">

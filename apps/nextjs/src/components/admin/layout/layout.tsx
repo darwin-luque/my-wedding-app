@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, useEffect } from 'react';
+import { type FC, PropsWithChildren, useEffect } from 'react';
 import { useSession } from '@clerk/nextjs';
 import { useRouter } from 'next/router';
 import { AdminSidebar } from '../sidebar';

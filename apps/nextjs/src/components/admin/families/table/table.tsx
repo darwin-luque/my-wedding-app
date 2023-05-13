@@ -1,6 +1,6 @@
 import type { Family, Invitation } from '@prisma/client';
 import { useRouter } from 'next/router';
-import { type FC } from 'react';
+import type { FC } from 'react';
 import { AdminDataTable, type ColumnsType } from '../../ui/data-table';
 
 type FamilyRelated = Family & {

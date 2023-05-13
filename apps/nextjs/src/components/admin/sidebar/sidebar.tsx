@@ -8,7 +8,7 @@ import {
   BsFillFileEarmarkRichtextFill,
   BsFillPersonFill,
 } from 'react-icons/bs';
-import { FC, PropsWithChildren } from 'react';
+import type { FC, PropsWithChildren } from 'react';
 import { AdminLogo } from '../ui/logo';
 import { AdminSidebarElement, AdminSidebarElementProps } from './element';
 import {
