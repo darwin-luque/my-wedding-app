@@ -40,6 +40,15 @@ model Invitation {
     family    Family   @relation(fields: [familyId], references: [id])
 }
 
+// Model just to keep track of files, reference should be pass to other models from the url of the asset
+model Asset {
+    id        String   @id @default(cuid())
+    url       String   @unique
+    key       String   @unique
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
 enum PersonStatus {
     IDLE
     PENDING
