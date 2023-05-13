@@ -50,6 +50,18 @@ model Faq {
     updatedAt DateTime @updatedAt
 }
 
+model Event {
+    id            String   @id @default(cuid())
+    name          String
+    description   String
+    startsAt      DateTime
+    endsAt        DateTime
+    googleMapsUrl String
+    pictures      String[]
+    createdAt     DateTime @default(now())
+    updatedAt     DateTime @updatedAt
+}
+
 // Model just to keep track of files, reference should be pass to other models from the url of the asset
 model Asset {
     id        String   @id @default(cuid())
