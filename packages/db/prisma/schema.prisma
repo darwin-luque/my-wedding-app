@@ -22,6 +22,8 @@ model Person {
     role          PersonRole   @default(NONE)
     isChild       Boolean      @default(false)
     status        PersonStatus @default(IDLE)
+    picture       String?
+    email         String?
     allergies     String?
     suggestedSong String?
     family        Family       @relation(fields: [familyId], references: [id])

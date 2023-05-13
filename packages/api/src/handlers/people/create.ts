@@ -9,6 +9,7 @@ export const createPersonHandler = publicProcedure
       role: z.string(),
       isChild: z.boolean(),
       familyId: z.string(),
+      picture: z.string().optional(),
     }),
   )
   .mutation(async ({ ctx, input }) => {
