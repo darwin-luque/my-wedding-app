@@ -46,7 +46,7 @@ const AdminCreateFamily: NextPage = () => {
       <>
         <AdminHeader breadcrumbs={breadcrumbs} />
         <main className="flex h-screen flex-col items-center">
-          <h1>Create a Family</h1>
+          <h1 className="prose text-xl font-bold">Create a Family</h1>
           <AdminFamilyCreateForm
             onSave={createFamily.mutate}
             onInvalid={onInvalid}
