@@ -43,7 +43,7 @@ const AdminCreatePerson: NextPage = () => {
         <title>
           Bessy & Darwin Wedding&apos;s Platform - Create Invitation
         </title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.svg" />
       </Head>
       <>
         <AdminHeader breadcrumbs={breadcrumbs} />

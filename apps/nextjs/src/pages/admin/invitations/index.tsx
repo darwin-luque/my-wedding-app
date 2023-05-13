@@ -25,7 +25,7 @@ const AdminPeople: NextPage = () => {
     <>
       <Head>
         <title>Bessy & Darwin Wedding&apos;s Platform - Invitations</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.svg" />
       </Head>
       <>
         <AdminHeader breadcrumbs={breadcrumbs} />
