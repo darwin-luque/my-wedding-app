@@ -1,4 +1,5 @@
 // src/pages/_app.tsx
+import '@uploadthing/react/styles.css';
 import { ClerkProvider } from '@clerk/nextjs';
 import type { AppType } from 'next/app';
 import { useRouter } from 'next/router';

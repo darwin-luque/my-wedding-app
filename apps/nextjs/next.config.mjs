@@ -18,6 +18,7 @@ const config = {
     fontLoaders: [
       { loader: 'next/font/google', options: { subsets: ['latin'] } },
     ],
+    esmExternals: false,
   },
   images: {
     domains: ['lh3.googleusercontent.com']
