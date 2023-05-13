@@ -26,4 +26,4 @@ export const assetRouter = {
     }),
 } satisfies FileRouter;
 
-export type OurFileRouter = typeof assetRouter;
+export type AssetRouter = typeof assetRouter;
