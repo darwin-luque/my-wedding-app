@@ -28,6 +28,7 @@
     "react-dropzone": "^14.2.3",
     "react-hook-form": "^7.43.9",
     "react-icons": "^4.8.0",
+    "react-vertical-timeline-component": "^3.6.0",
     "uploadthing": "^3.0.2",
     "zod": "^3.18.0"
   },
@@ -35,6 +36,7 @@
     "@types/node": "^18.0.0",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.9",
+    "@types/react-vertical-timeline-component": "^3.3.3",
     "autoprefixer": "^10.4.13",
     "eslint": "^8.28.0",
     "eslint-config-next": "13.1.6",
