@@ -18,10 +18,10 @@ export const AdminAssetCard: FC<AdminAssetCardProps> = ({ asset }) => {
   }).format(new Date(asset.createdAt));
 
   const parsedKey =
-    asset.key.length > 27 ? `${asset.key.slice(0, 27)}...` : asset.key;
+    asset.key.length > 20 ? `${asset.key.slice(0, 20)}...` : asset.key;
 
   return (
-    <div className="card w-96 bg-base-100 shadow-xl">
+    <div className="card h-96 w-80 bg-base-100 shadow-xl">
       <figure>
         <Image
           src={asset.url}
@@ -30,16 +30,15 @@ export const AdminAssetCard: FC<AdminAssetCardProps> = ({ asset }) => {
           height={250}
           style={{
             objectFit: 'contain',
-            width: 400,
             height: 250,
           }}
         />
       </figure>
       <div className="card-body">
         <div className="tooltip" data-tip={asset.key}>
-          <h2 className="card-title">{parsedKey}</h2>
+          <h2 className="card-title text-base font-bold">{parsedKey}</h2>
         </div>
-        <div className="pb-2 pl-2">
+        <div className="pb-2 pl-2 text-sm">
           <p>
             <strong>Created At:</strong> {parsedCreatedAt}
           </p>
@@ -48,14 +47,16 @@ export const AdminAssetCard: FC<AdminAssetCardProps> = ({ asset }) => {
           </p>
         </div>
         <div className="card-actions justify-end">
-          <button className="btn-primary btn-error btn-sm btn gap-2">
-            <FaTrash />
-            <span>Delete</span>
-          </button>
-          <button className="btn-primary btn-info btn-sm btn gap-2">
-            <FaPen />
-            <span>Edit</span>
-          </button>
+          <div className="tooltip" data-tip="Delete">
+            <button className="btn-primary btn-error btn-xs btn gap-2">
+              <FaTrash />
+            </button>
+          </div>
+          <div className="tooltip" data-tip="Edit">
+            <button className="btn-primary btn-info btn-xs btn gap-2">
+              <FaPen />
+            </button>
+          </div>
         </div>
       </div>
     </div>

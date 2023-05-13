@@ -4,6 +4,8 @@ import { AdminHeader } from '../../../components/admin/header';
 import { IBreadcrumb } from '../../../components/admin/header/breadcrumbs';
 import { trpc } from '../../../utils/trpc';
 import { AdminAssetCard } from '../../../components/admin/assets/card';
+import Link from 'next/link';
+import { FaPlus } from 'react-icons/fa';
 
 const breadcrumbs: IBreadcrumb[] = [
   {
@@ -25,8 +27,17 @@ const AdminAssetsPage: NextPage = () => {
       <>
         <AdminHeader breadcrumbs={breadcrumbs} />
         <main className="flex flex-col items-center">
-          <h1 className="prose text-xl font-bold">Assets Page</h1>
-          <div className="flex w-full flex-1 items-start justify-start px-4 py-10">
+          <div className="relative flex w-full items-center justify-center">
+            <h1 className="prose text-xl font-bold">Assets Page</h1>
+            <Link
+              href="/admin/assets/upload"
+              className="btn-primary btn-sm btn absolute right-10 flex items-center gap-2"
+            >
+              <FaPlus />
+              <span>Upload</span>
+            </Link>
+          </div>
+          <div className="flex w-full flex-1 flex-wrap items-start justify-between gap-10 p-10">
             {data?.map((asset) => (
               <AdminAssetCard
                 asset={asset}

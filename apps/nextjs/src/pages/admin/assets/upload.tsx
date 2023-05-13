@@ -1,10 +1,13 @@
-import { UploadButton } from '@uploadthing/react';
+import { UploadDropzone } from '@uploadthing/react';
+import { AiFillCloseCircle } from 'react-icons/ai';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import type { AssetRouter } from '../../../utils/uploadthing';
-import { AdminHeader } from '../../../components/admin/header';
 import { IBreadcrumb } from '../../../components/admin/header/breadcrumbs';
+import { AdminHeader } from '../../../components/admin/header';
+import type { AssetRouter } from '../../../utils/uploadthing';
 import { trpc } from '../../../utils/trpc';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const breadcrumbs: IBreadcrumb[] = [
   {
@@ -25,7 +28,13 @@ type UploadedAsset = {
 };
 
 const AdminAssetUploadPage: NextPage = () => {
-  const createMultipleAsset = trpc.assets.createMutliple.useMutation();
+  const router = useRouter();
+
+  const createMultipleAsset = trpc.assets.createMutliple.useMutation({
+    onSuccess: () => {
+      router.push('/admin/assets');
+    },
+  });
 
   const onUploadComplete = (files: UploadedAsset[] = []) => {
     createMultipleAsset.mutate(
@@ -45,9 +54,19 @@ const AdminAssetUploadPage: NextPage = () => {
       <>
         <AdminHeader breadcrumbs={breadcrumbs} />
         <main className="flex flex-col items-center justify-between gap-10">
-          <h1 className="prose flex-none text-xl font-bold">Upload an Asset</h1>
-          <div className="flex-1">
-            <UploadButton<AssetRouter>
+          <div className="relative flex w-full items-center justify-center">
+            <h1 className="prose text-xl font-bold">Upload Assets</h1>
+            <Link
+              href="/admin/assets"
+              className="btn-error btn-sm btn absolute right-10 flex items-center gap-2"
+            >
+              <AiFillCloseCircle />
+              <span>Cancel</span>
+            </Link>
+          </div>
+
+          <div className="w-9/12 flex-1 justify-center">
+            <UploadDropzone<AssetRouter>
               endpoint="imageUploader"
               onClientUploadComplete={onUploadComplete}
             />
