@@ -9,6 +9,7 @@ import type { FC } from 'react';
 import { useRouter } from 'next/router';
 import { readableRole } from '../../../../utils/readable-role';
 import { AdminDataTable, ColumnsType } from '../../ui/data-table';
+import Image from 'next/image';
 
 export type PersonRelated = Person & {
   family: Family & {
@@ -22,6 +23,24 @@ export type AdminPeopleTableProps = {
 
 const columns: ColumnsType<PersonRelated> = [
   {
+    title: 'Picture',
+    dataIndex: 'picture',
+    key: 'picture',
+    render: (picture) => (
+      <div className="avatar">
+        <div className="mask mask-squircle h-12 w-12">
+          <Image
+            src={picture}
+            alt="avatar"
+            width={48}
+            height={48}
+            className="mask mask-squircle h-12 w-12 object-cover"
+          />
+        </div>
+      </div>
+    ),
+  },
+  {
     title: 'Name',
     dataIndex: 'name',
     key: 'name',
@@ -31,7 +50,7 @@ const columns: ColumnsType<PersonRelated> = [
     title: 'Role',
     dataIndex: 'role',
     key: 'role',
-    width: 150,
+    width: 100,
     render: (role: PersonRole) => <p>{readableRole(role).en}</p>,
   },
   {

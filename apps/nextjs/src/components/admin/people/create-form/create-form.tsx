@@ -2,10 +2,13 @@ import { FieldErrors, useForm } from 'react-hook-form';
 import type { FC } from 'react';
 import { trpc } from '../../../../utils/trpc';
 import { AdminConfirmModal } from '../../ui/confirm-modal';
+import { AdminSelectAssetsModal } from '../../ui/select-assets-modal';
+import Image from 'next/image';
 
 export type FormValues = {
   name: string;
   role: string;
+  picture?: string;
   isChild: boolean;
   familyId: string;
 };
@@ -41,6 +44,8 @@ export const AdminPeopleCreateForm: FC<AdminPeopleCreateFormProps> = ({
   const {
     register,
     handleSubmit,
+    setValue,
+    getValues,
     formState: { errors },
   } = useForm({
     resolver,
@@ -51,6 +56,12 @@ export const AdminPeopleCreateForm: FC<AdminPeopleCreateFormProps> = ({
   });
 
   const onSubmit = handleSubmit(onSave, onInvalid);
+
+  const selectPictureHandler = (urls: string[]) => {
+    setValue('picture', urls[0] as never);
+  };
+
+  const picture = getValues('picture') as string | undefined;
 
   return (
     <form className="w-[90%] px-10" onSubmit={(e) => e.preventDefault()}>
@@ -113,6 +124,26 @@ export const AdminPeopleCreateForm: FC<AdminPeopleCreateFormProps> = ({
         )}
       </div>
       <div className="form-control w-fit">
+        <label className="label items-center justify-center gap-4">
+          <span className="label-text">Select a picture for this person</span>
+          <a
+            href="#select-assets-modal"
+            className="btn-primary btn-sm btn rounded-lg capitalize"
+          >
+            Select Asset
+          </a>
+        </label>
+        {picture && (
+          <Image
+            src={picture}
+            alt="picture"
+            width={200}
+            height={200}
+            style={{ objectFit: 'contain' }}
+          />
+        )}
+      </div>
+      <div className="form-control w-fit">
         <label className="label cursor-pointer gap-4">
           <span className="label-text">Is Child?</span>
           <input {...register('isChild')} type="checkbox" className="toggle" />
@@ -129,6 +160,11 @@ export const AdminPeopleCreateForm: FC<AdminPeopleCreateFormProps> = ({
         onConfirm={onSubmit}
         title="Are you sure you want to create this person?"
         description="Confirm that you want to create this person. You can edit and delete the person further on."
+      />
+      <AdminSelectAssetsModal
+        multiple={false}
+        onSelect={selectPictureHandler}
+        initialSelected={picture ? [picture] : undefined}
       />
     </form>
   );
