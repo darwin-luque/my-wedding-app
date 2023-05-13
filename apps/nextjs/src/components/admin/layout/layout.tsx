@@ -9,8 +9,12 @@ export const AdminLayout: FC<PropsWithChildren> = ({ children }) => {
   // Just to prevent the cms from loading if the user is not signed in
   const [hasAccess, setHasAccess] = useState(false);
   const { isLoaded, isSignedIn } = useSession();
-  const { organizationList, isLoaded: organizationIsLoaded } =
-    useOrganizationList();
+  const {
+    organizationList,
+    isLoaded: organizationIsLoaded,
+    setActive,
+  } = useOrganizationList();
+
   const router = useRouter();
 
   useEffect(() => {
@@ -21,17 +25,19 @@ export const AdminLayout: FC<PropsWithChildren> = ({ children }) => {
 
   useEffect(() => {
     if (organizationIsLoaded && organizationList) {
-      const hasOrganization = organizationList?.some(
+      const organization = organizationList?.find(
         (org) => org.organization.slug === clientEnv.NEXT_PUBLIC_WEDDING_SLOG,
       );
 
-      setHasAccess(hasOrganization);
+      setHasAccess(!!organization);
 
-      if (!hasOrganization) {
+      if (!organization) {
         router.push('/');
+      } else {
+        setActive(organization);
       }
     }
-  }, [organizationIsLoaded, organizationList, router]);
+  }, [organizationIsLoaded, organizationList, router, setActive]);
 
   if (!isLoaded || !organizationIsLoaded || !organizationList || !hasAccess) {
     return <AdminLayoutLoader />;

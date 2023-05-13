@@ -1,11 +1,11 @@
 import {
   BsFillGridFill,
   BsFillPeopleFill,
+  BsFillPersonFill,
   BsFillEnvelopePaperFill,
   BsFillCalendarEventFill,
   BsFillQuestionCircleFill,
   BsFillFileEarmarkRichtextFill,
-  BsFillPersonFill,
 } from 'react-icons/bs';
 import type { FC, PropsWithChildren } from 'react';
 import { AdminLogo } from '../ui/logo';

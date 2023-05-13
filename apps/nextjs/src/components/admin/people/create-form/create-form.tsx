@@ -45,7 +45,7 @@ export const AdminPeopleCreateForm: FC<AdminPeopleCreateFormProps> = ({
     register,
     handleSubmit,
     setValue,
-    getValues,
+    watch,
     formState: { errors },
   } = useForm({
     resolver,
@@ -61,7 +61,7 @@ export const AdminPeopleCreateForm: FC<AdminPeopleCreateFormProps> = ({
     setValue('picture', urls[0] as never);
   };
 
-  const picture = getValues('picture') as string | undefined;
+  const picture = watch('picture') as string | undefined;
 
   return (
     <form className="w-[90%] px-10" onSubmit={(e) => e.preventDefault()}>
