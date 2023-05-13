@@ -1,5 +1,4 @@
 import {
-  BsFillGeoFill,
   BsFillGridFill,
   BsFillPeopleFill,
   BsFillEnvelopePaperFill,
@@ -21,16 +20,6 @@ const singleElements: AdminSidebarElementProps[] = [
     label: 'Dashboard',
     href: '/admin',
     icon: <BsFillGridFill size={20} />,
-  },
-  {
-    label: 'FAQ',
-    href: '/admin/faq',
-    icon: <BsFillQuestionCircleFill size={20} />,
-  },
-  {
-    label: 'Assets',
-    href: '/admin/assets',
-    icon: <BsFillFileEarmarkRichtextFill size={20} />,
   },
 ];
 
@@ -56,7 +45,7 @@ const sections: AdminSidebarSectionProps[] = [
     ],
   },
   {
-    title: 'Events',
+    title: 'Others',
     elements: [
       {
         label: 'Events',
@@ -64,9 +53,14 @@ const sections: AdminSidebarSectionProps[] = [
         icon: <BsFillCalendarEventFill size={20} />,
       },
       {
-        label: 'Locations',
-        href: '/admin/locations',
-        icon: <BsFillGeoFill size={20} />,
+        label: 'FAQ',
+        href: '/admin/faq',
+        icon: <BsFillQuestionCircleFill size={20} />,
+      },
+      {
+        label: 'Assets',
+        href: '/admin/assets',
+        icon: <BsFillFileEarmarkRichtextFill size={20} />,
       },
     ],
   },
