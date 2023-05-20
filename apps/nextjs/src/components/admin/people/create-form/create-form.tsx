@@ -98,7 +98,7 @@ export const AdminPeopleCreateForm: FC<AdminPeopleCreateFormProps> = ({
       </div>
       <div className="form-control w-full max-w-md">
         <label className="label">
-          <span className="label-text">What is the person&apos;s name?</span>
+          <span className="label-text">What is the person&apos;s role?</span>
         </label>
         <select
           className="select-bordered select w-full"

@@ -33,8 +33,8 @@ const AdminCreatePerson: NextPage = () => {
     },
   });
 
-  const onInvalid = () => {
-    console.error('Could not create family');
+  const onInvalid = (error: any) => {
+    console.error('Could not create family', error);
   };
 
   return (
@@ -45,7 +45,7 @@ const AdminCreatePerson: NextPage = () => {
       </Head>
       <>
         <AdminHeader breadcrumbs={breadcrumbs} />
-        <main className="flex h-screen flex-col items-center">
+        <main className="flex flex-col items-center pb-10">
           <h1 className="prose text-xl font-bold">Create a Person</h1>
           <AdminPeopleCreateForm
             onSave={createPerson.mutate}
