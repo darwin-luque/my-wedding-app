@@ -1,8 +1,9 @@
-import { Parisienne, EB_Garamond } from 'next/font/google';
-import { FC, PropsWithChildren } from 'react';
-import { MainNavbar } from './navbar';
 import Link from 'next/link';
+import { FC, PropsWithChildren } from 'react';
+import { Parisienne, EB_Garamond } from 'next/font/google';
 import { MainCountdown } from './countdown';
+import { MainFooter } from './footer';
+import { MainNavbar } from './navbar';
 
 const parisienne = Parisienne({
   weight: '400',
@@ -33,7 +34,8 @@ export const MainLayout: FC<PropsWithChildren> = ({ children }) => {
         </div>
       </div>
       <MainNavbar />
-      {children}
+      <div className="flex-1">{children}</div>
+      <MainFooter />
     </div>
   );
 };
