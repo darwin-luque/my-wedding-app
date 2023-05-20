@@ -23,7 +23,7 @@ export const MainHero = () => {
             <br />
             &
             <br />
-            Darwin Alcerro
+            Darwin Luque
           </h1>
           <p className="py-6">
             Nos casamos! Unete a nuestra celebracion el

@@ -16,10 +16,14 @@ const ebGaramond = EB_Garamond({
 
 export const MainLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
-    <div className={`flex h-screen w-screen flex-col ${ebGaramond.className}`}>
+    <div
+      className="flex h-screen w-screen flex-col overflow-auto"
+      style={ebGaramond.style}
+    >
       <div className="relative hidden w-full items-center justify-center md:flex">
         <Link
-          className={`mt-6 mb-2 text-5xl normal-case tracking-normal hover:cursor-pointer ${parisienne.className}`}
+          className="mt-6 mb-2 text-5xl normal-case tracking-normal hover:cursor-pointer"
+          style={parisienne.style}
           href="/"
         >
           Bessy & Darwin

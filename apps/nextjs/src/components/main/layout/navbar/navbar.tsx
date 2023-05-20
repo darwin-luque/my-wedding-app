@@ -51,7 +51,7 @@ const elements: NavbarElement[] = [
 
 export const MainNavbar: FC = () => {
   return (
-    <nav className="navbar sticky top-0 bg-white bg-opacity-30 py-10 backdrop-blur-sm md:py-0">
+    <nav className="navbar sticky top-0 z-50 bg-white bg-opacity-30 py-10 backdrop-blur-sm md:py-0">
       <div className="navbar-start md:hidden">
         <div className="dropdown">
           <label tabIndex={0} className="btn-ghost btn">
