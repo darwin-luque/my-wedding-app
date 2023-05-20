@@ -1,7 +1,13 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { MainFaqsList } from '../components/main/faqs/list';
+import { trpc } from '../utils/trpc';
 
 const Faq: NextPage = () => {
+  const { data: faqs } = trpc.faq.list.useQuery();
+
+  console.log({ faqs });
+
   return (
     <>
       <Head>
@@ -9,7 +15,7 @@ const Faq: NextPage = () => {
         <link rel="icon" href="/favicon.svg" />
       </Head>
       <main className="flex flex-col items-center">
-        <h1>Faq</h1>
+        <MainFaqsList faqs={faqs ?? []} />
       </main>
     </>
   );
