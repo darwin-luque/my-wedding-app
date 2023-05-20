@@ -42,11 +42,6 @@ const elements: NavbarElement[] = [
     name: 'Preguntas Frecuentes',
     url: '/faq',
   },
-  {
-    id: 5,
-    name: 'Fotos',
-    url: '/photos',
-  },
 ];
 
 export const MainNavbar: FC = () => {
