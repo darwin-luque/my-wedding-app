@@ -1,6 +1,11 @@
 // src/pages/_app.tsx
 import '@uploadthing/react/styles.css';
-import { ClerkProvider } from '@clerk/nextjs';
+import {
+  ClerkProvider,
+  RedirectToSignIn,
+  SignedIn,
+  SignedOut,
+} from '@clerk/nextjs';
 import type { AppType } from 'next/app';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
@@ -14,7 +19,7 @@ const MyApp: AppType = ({ Component, pageProps: { ...pageProps } }) => {
 
   const isPublicPage = useMemo(() => !pathname.includes('admin'), [pathname]);
   const isAuthPage = useMemo(
-    () => pathname === 'sign-in' || pathname === 'sign-up',
+    () => pathname.includes('sign-in') || pathname.includes('sign-up'),
     [pathname],
   );
 
@@ -29,9 +34,16 @@ const MyApp: AppType = ({ Component, pageProps: { ...pageProps } }) => {
           </MainLayout>
         )
       ) : (
-        <AdminLayout>
-          <Component {...pageProps} />
-        </AdminLayout>
+        <>
+          <SignedIn>
+            <AdminLayout>
+              <Component {...pageProps} />
+            </AdminLayout>
+          </SignedIn>
+          <SignedOut>
+            <RedirectToSignIn afterSignInUrl="/admin" />
+          </SignedOut>
+        </>
       )}
     </ClerkProvider>
   );
