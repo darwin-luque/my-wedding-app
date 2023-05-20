@@ -157,6 +157,9 @@ importers:
       '@uploadthing/react':
         specifier: ^3.0.2
         version: 3.0.2(react-dropzone@14.2.3)(react@18.2.0)(uploadthing@3.0.2)
+      moment:
+        specifier: ^2.29.4
+        version: 2.29.4
       next:
         specifier: ^13.2.4
         version: 13.2.4(react-dom@18.2.0)(react@18.2.0)
@@ -8465,6 +8468,10 @@ packages:
     resolution: {integrity: sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==}
     engines: {node: '>=10'}
     hasBin: true
+    dev: false
+
+  /moment@2.29.4:
+    resolution: {integrity: sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==}
     dev: false
 
   /ms@2.0.0:
