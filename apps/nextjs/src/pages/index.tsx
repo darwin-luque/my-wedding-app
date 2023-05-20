@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { MainHero } from '../components/main/hero';
 
 const Home: NextPage = () => {
   return (
@@ -9,7 +10,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.svg" />
       </Head>
       <main className="flex h-screen flex-col items-center">
-        <h1>My Wedding Platform</h1>
+        <MainHero />
       </main>
     </>
   );
