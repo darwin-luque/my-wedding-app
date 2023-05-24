@@ -28,31 +28,31 @@ export const MainCountdown: FC = () => {
   return (
     <div className="grid auto-cols-max grid-flow-col gap-5 text-center">
       <div className="flex flex-col">
-        <span className="countdown font-mono text-2xl">
+        <span className="countdown font-mono text-xl lg:text-2xl">
           <span style={{ '--value': countdown.months }}></span>
         </span>
         months
       </div>
       <div className="flex flex-col">
-        <span className="countdown font-mono text-2xl">
+        <span className="countdown font-mono text-xl lg:text-2xl">
           <span style={{ '--value': countdown.days }}></span>
         </span>
         days
       </div>
       <div className="flex flex-col">
-        <span className="countdown font-mono text-2xl">
+        <span className="countdown font-mono text-xl lg:text-2xl">
           <span style={{ '--value': countdown.hours }}></span>
         </span>
         hours
       </div>
       <div className="flex flex-col">
-        <span className="countdown font-mono text-2xl">
+        <span className="countdown font-mono text-xl lg:text-2xl">
           <span style={{ '--value': countdown.minutes }}></span>
         </span>
         min
       </div>
-      <div className="flex flex-col">
-        <span className="countdown font-mono text-2xl">
+      <div className="hidden flex-col lg:flex">
+        <span className="countdown font-mono text-xl lg:text-2xl">
           <span style={{ '--value': countdown.seconds }}></span>
         </span>
         sec

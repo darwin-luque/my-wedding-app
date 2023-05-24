@@ -12,7 +12,7 @@ export const MainHero = () => {
       <div className="hero-content flex-col gap-16 lg:flex-row">
         <Image
           src="/images/IMG_3357.png"
-          className="max-w-md rounded-lg shadow-2xl"
+          className="max-w-sm rounded-lg shadow-2xl md:max-w-md"
           alt="Hero Image"
           width={3024}
           height={4032}

@@ -102,7 +102,7 @@ export const MainNavbar: FC = () => {
           </ul>
         </div>
         <Link
-          className={`btn-ghost btn my-4 text-5xl normal-case ${parisienne.className}`}
+          className={`btn-ghost btn my-4 text-3xl normal-case md:text-4xl lg:text-5xl ${parisienne.className}`}
           href="/"
         >
           Bessy & Darwin

@@ -6,8 +6,6 @@ import { trpc } from '../utils/trpc';
 const Faq: NextPage = () => {
   const { data: faqs } = trpc.faq.list.useQuery();
 
-  console.log({ faqs });
-
   return (
     <>
       <Head>
