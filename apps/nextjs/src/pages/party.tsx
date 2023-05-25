@@ -6,7 +6,7 @@ import { partySplitter } from '../utils/party-splitter';
 import { MainPartySection } from '../components/main/party/section';
 
 const Party: NextPage = () => {
-  const { data: party } = trpc.people.listParty.useQuery();
+  const { data: party, isLoading } = trpc.people.listParty.useQuery();
 
   const parsedParty = useMemo(
     () => (!!party ? partySplitter(party) : undefined),
@@ -23,11 +23,15 @@ const Party: NextPage = () => {
         <MainPartySection
           people={parsedParty?.bridesParents ?? []}
           title="Los papas de Bessy"
+          loading={isLoading}
+          predefinedPeopleAmount={2}
         />
         <div className="divider mx-auto my-8 w-11/12" />
         <MainPartySection
           people={parsedParty?.groomsParents ?? []}
           title="Los papas de Darwin"
+          predefinedPeopleAmount={2}
+          loading={isLoading}
         />
       </main>
     </>

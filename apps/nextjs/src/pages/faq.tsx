@@ -4,7 +4,7 @@ import { MainFaqsList } from '../components/main/faqs/list';
 import { trpc } from '../utils/trpc';
 
 const Faq: NextPage = () => {
-  const { data: faqs } = trpc.faq.list.useQuery();
+  const { data: faqs, isLoading } = trpc.faq.list.useQuery();
 
   return (
     <>
@@ -13,7 +13,7 @@ const Faq: NextPage = () => {
         <link rel="icon" href="/favicon.svg" />
       </Head>
       <main className="flex flex-col items-center">
-        <MainFaqsList faqs={faqs ?? []} />
+        <MainFaqsList faqs={faqs ?? []} loading={isLoading} />
       </main>
     </>
   );

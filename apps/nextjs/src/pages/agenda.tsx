@@ -10,7 +10,7 @@ const parisienne = Parisienne({
 });
 
 const Agenda: NextPage = () => {
-  const { data } = trpc.events.list.useQuery();
+  const { data, isLoading } = trpc.events.list.useQuery();
 
   return (
     <>
@@ -26,7 +26,7 @@ const Agenda: NextPage = () => {
             Agenda
           </h2>
         </div>
-        <MainAgendaTimeline events={data ?? []} />
+        <MainAgendaTimeline loading={isLoading} events={data ?? []} />
       </main>
     </>
   );

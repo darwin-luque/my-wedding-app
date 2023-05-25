@@ -1,4 +1,4 @@
-// src/pages/_app.tsx
+import 'react-loading-skeleton/dist/skeleton.css';
 import '@uploadthing/react/styles.css';
 import {
   ClerkProvider,
