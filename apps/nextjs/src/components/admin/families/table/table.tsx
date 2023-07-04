@@ -12,6 +12,7 @@ type FamilyRelated = Family & {
 
 export type AdminFamiliesTableProps = {
   data: FamilyRelated[];
+  loading?: boolean;
 };
 
 const columns: ColumnsType<FamilyRelated> = [
@@ -84,12 +85,16 @@ const columns: ColumnsType<FamilyRelated> = [
   },
 ];
 
-export const AdminFamiliesTable: FC<AdminFamiliesTableProps> = ({ data }) => {
+export const AdminFamiliesTable: FC<AdminFamiliesTableProps> = ({
+  data,
+  loading = false,
+}) => {
   const router = useRouter();
   return (
     <AdminDataTable<FamilyRelated>
       data={data}
       columns={columns}
+      loading={loading}
       onCreate={() => router.push('/admin/families/create')}
     />
   );

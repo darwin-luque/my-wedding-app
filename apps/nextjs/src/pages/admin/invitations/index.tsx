@@ -19,7 +19,7 @@ const breadcrumbs: IBreadcrumb[] = [
 ];
 
 const AdminPeople: NextPage = () => {
-  const { data } = trpc.invitations.list.useQuery();
+  const { data, isLoading } = trpc.invitations.list.useQuery();
 
   return (
     <>
@@ -30,7 +30,7 @@ const AdminPeople: NextPage = () => {
       <>
         <AdminHeader breadcrumbs={breadcrumbs} />
         <main className="flex flex-col items-center">
-          <AdminInvitationsTable data={data ?? []} />
+          <AdminInvitationsTable data={data ?? []} loading={isLoading} />
         </main>
       </>
     </>

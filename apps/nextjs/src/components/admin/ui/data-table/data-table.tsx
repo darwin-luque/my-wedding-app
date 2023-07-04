@@ -1,5 +1,6 @@
 import { BsFillInboxFill } from 'react-icons/bs';
 import { FaPen, FaPlus, FaTrash } from 'react-icons/fa';
+import { ThreeDotsInfiniteSignLoader } from '../../../ui/loaders/three-dots-infinite-sign';
 
 export type ColumnType<T> = {
   title: string;
@@ -17,11 +18,18 @@ export type AdminDataTable<T> = {
   onDelete?: (rows: T) => void;
   onUpdate?: (row: T) => void;
   onCreate?: () => void;
+  loading?: boolean;
+  spinner?: JSX.Element;
 };
 
-export const AdminDataTable = <T,>(props: AdminDataTable<T>): JSX.Element => {
-  const { onDelete, onUpdate, onCreate, ...rest } = props;
-
+export const AdminDataTable = <T,>({
+  onDelete,
+  onUpdate,
+  onCreate,
+  loading = false,
+  spinner = <ThreeDotsInfiniteSignLoader />,
+  ...rest
+}: AdminDataTable<T>): JSX.Element => {
   const actionColumn: ColumnType<T> = {
     title: 'Actions',
     key: 'actions',
@@ -72,35 +80,45 @@ export const AdminDataTable = <T,>(props: AdminDataTable<T>): JSX.Element => {
             ))}
           </tr>
         </thead>
-        <tbody>
-          {rest.data.length === 0 && (
-            <tr>
-              <td colSpan={allColumns.length} className="p-0">
-                <div className="flex w-full flex-col items-center pt-5">
-                  <BsFillInboxFill size={42} />
-                  <p>No data</p>
-                </div>
-              </td>
-            </tr>
-          )}
-          {rest.data.map((row, index) => (
-            <tr key={index}>
-              {allColumns.map((column) => (
-                <td
-                  className="text-center"
-                  key={column.key}
-                  style={{ width: column.width }}
-                >
-                  {column.render?.(
-                    column.dataIndex ? row[column.dataIndex] : undefined,
-                    row,
-                    index,
-                  ) ?? String(column.dataIndex ? row[column.dataIndex] : '')}
+        {loading ? (
+          <tr>
+            <td colSpan={allColumns.length} className="p-0">
+              <div className="flex h-32 w-full flex-col items-center justify-center pt-5">
+                {spinner}
+              </div>
+            </td>
+          </tr>
+        ) : (
+          <tbody>
+            {rest.data.length === 0 && (
+              <tr>
+                <td colSpan={allColumns.length} className="p-0">
+                  <div className="flex w-full flex-col items-center pt-5">
+                    <BsFillInboxFill size={42} />
+                    <p>No data</p>
+                  </div>
                 </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
+              </tr>
+            )}
+            {rest.data.map((row, index) => (
+              <tr key={index}>
+                {allColumns.map((column) => (
+                  <td
+                    className="text-center"
+                    key={column.key}
+                    style={{ width: column.width }}
+                  >
+                    {column.render?.(
+                      column.dataIndex ? row[column.dataIndex] : undefined,
+                      row,
+                      index,
+                    ) ?? String(column.dataIndex ? row[column.dataIndex] : '')}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        )}
       </table>
     </div>
   );
