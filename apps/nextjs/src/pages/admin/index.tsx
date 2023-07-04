@@ -20,7 +20,7 @@ const AdminDashboard: NextPage = () => {
       </Head>
       <>
         <AdminHeader breadcrumbs={breadcrumbs} />
-        <main className="flex h-screen flex-col items-center">
+        <main className="flex flex-col items-center">
           <h1>My Wedding Platform</h1>
         </main>
       </>

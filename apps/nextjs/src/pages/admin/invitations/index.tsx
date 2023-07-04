@@ -29,7 +29,7 @@ const AdminPeople: NextPage = () => {
       </Head>
       <>
         <AdminHeader breadcrumbs={breadcrumbs} />
-        <main className="flex h-screen flex-col items-center">
+        <main className="flex flex-col items-center">
           <AdminInvitationsTable data={data ?? []} />
         </main>
       </>

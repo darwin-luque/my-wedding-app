@@ -45,7 +45,7 @@ const AdminCreateFamily: NextPage = () => {
       </Head>
       <>
         <AdminHeader breadcrumbs={breadcrumbs} />
-        <main className="flex h-screen flex-col items-center">
+        <main className="flex flex-col items-center">
           <h1 className="prose text-xl font-bold">Create a Family</h1>
           <AdminFamilyCreateForm
             onSave={createFamily.mutate}
