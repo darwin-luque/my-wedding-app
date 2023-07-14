@@ -9,6 +9,7 @@ export type InvitationsRelated = Invitation & {
 
 export type AdminInvitationsTableProps = {
   data: InvitationsRelated[];
+  loading?: boolean;
 };
 
 const columns: ColumnsType<InvitationsRelated> = [
@@ -67,6 +68,7 @@ const columns: ColumnsType<InvitationsRelated> = [
 
 export const AdminInvitationsTable: FC<AdminInvitationsTableProps> = ({
   data,
+  loading = false,
 }) => {
   const router = useRouter();
 
@@ -74,6 +76,7 @@ export const AdminInvitationsTable: FC<AdminInvitationsTableProps> = ({
     <AdminDataTable<InvitationsRelated>
       data={data}
       columns={columns}
+      loading={loading}
       onCreate={() => router.push('/admin/invitations/create')}
     />
   );

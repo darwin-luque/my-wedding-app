@@ -19,6 +19,7 @@ export type PersonRelated = Person & {
 
 export type AdminPeopleTableProps = {
   data: PersonRelated[];
+  loading?: boolean;
 };
 
 const columns: ColumnsType<PersonRelated> = [
@@ -121,12 +122,16 @@ const columns: ColumnsType<PersonRelated> = [
   },
 ];
 
-export const AdminPeopleTable: FC<AdminPeopleTableProps> = ({ data }) => {
+export const AdminPeopleTable: FC<AdminPeopleTableProps> = ({
+  data,
+  loading = false,
+}) => {
   const router = useRouter();
   return (
     <AdminDataTable<PersonRelated>
       data={data}
       columns={columns}
+      loading={loading}
       onCreate={() => router.push('/admin/people/create')}
     />
   );

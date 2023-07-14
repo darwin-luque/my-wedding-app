@@ -8,6 +8,7 @@ import Image from 'next/image';
 export type FormValues = {
   name: string;
   role: string;
+  description?: string;
   picture?: string;
   isChild: boolean;
   familyId: string;
@@ -83,7 +84,7 @@ export const AdminPeopleCreateForm: FC<AdminPeopleCreateFormProps> = ({
       </div>
       <div className="form-control w-full max-w-md">
         <label className="label">
-          <span className="label-text">What is the person&apos;s name?</span>
+          <span className="label-text">What is the person&apos;s family?</span>
         </label>
         <select
           className="select-bordered select w-full"
@@ -105,7 +106,9 @@ export const AdminPeopleCreateForm: FC<AdminPeopleCreateFormProps> = ({
           {...register('role')}
           defaultValue="NONE"
         >
-          <option value="NONE">Guest</option>
+          <option selected value="NONE">
+            Guest
+          </option>
           <option value="BEST_MAN">Best Man</option>
           <option value="BRIDESMAID">Bridesmaid</option>
           <option value="GROOMSMAN">Groomsman</option>
@@ -116,10 +119,26 @@ export const AdminPeopleCreateForm: FC<AdminPeopleCreateFormProps> = ({
           <option value="GROOMS_MOTHER">Mother of the Groom</option>
           <option value="FLOWER_GIRL">Flower Girl</option>
           <option value="RING_BEARER">Ring Bearer</option>
+          <option value="WEDDING_PLANNER">Wedding Planner</option>
         </select>
         {errors.role && (
           <label className="label">
             <span className="label-text-alt">{errors.role.message}</span>
+          </label>
+        )}
+      </div>
+      <div className="form-control w-full max-w-xl">
+        <label className="label">
+          <span className="label-text">Describe this person (optional)</span>
+        </label>
+        <textarea
+          placeholder="Type here"
+          className="textarea-bordered textarea w-full"
+          {...register('description')}
+        />
+        {errors.description && (
+          <label className="label">
+            <span className="label-text-alt">{errors.description.message}</span>
           </label>
         )}
       </div>
@@ -145,7 +164,7 @@ export const AdminPeopleCreateForm: FC<AdminPeopleCreateFormProps> = ({
       </div>
       <div className="form-control w-fit">
         <label className="label cursor-pointer gap-4">
-          <span className="label-text">Is Child?</span>
+          <span className="label-text">Is it a child?</span>
           <input {...register('isChild')} type="checkbox" className="toggle" />
         </label>
       </div>

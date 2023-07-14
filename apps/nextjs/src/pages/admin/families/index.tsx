@@ -19,7 +19,7 @@ const breadcrumbs: IBreadcrumb[] = [
 ];
 
 const AdminFamilies: NextPage = () => {
-  const { data } = trpc.families.list.useQuery();
+  const { data, isLoading } = trpc.families.list.useQuery();
 
   return (
     <>
@@ -29,8 +29,8 @@ const AdminFamilies: NextPage = () => {
       </Head>
       <>
         <AdminHeader breadcrumbs={breadcrumbs} />
-        <main className="flex h-screen flex-col items-center">
-          <AdminFamiliesTable data={data ?? []} />
+        <main className="flex flex-col items-center">
+          <AdminFamiliesTable data={data ?? []} loading={isLoading} />
         </main>
       </>
     </>

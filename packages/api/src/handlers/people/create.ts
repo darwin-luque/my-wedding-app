@@ -7,6 +7,7 @@ export const createPersonHandler = publicProcedure
     z.object({
       name: z.string(),
       role: z.string(),
+      description: z.string().optional(),
       isChild: z.boolean(),
       familyId: z.string(),
       picture: z.string().optional(),

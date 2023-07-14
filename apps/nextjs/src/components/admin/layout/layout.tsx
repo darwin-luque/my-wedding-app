@@ -4,7 +4,7 @@ import { AdminSidebar } from '../sidebar';
 export const AdminLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <AdminSidebar>
-      <div className="overflow-hidden">{children}</div>
+      <div className="h-full">{children}</div>
     </AdminSidebar>
   );
 };
