@@ -8,6 +8,7 @@ import Image from 'next/image';
 export type FormValues = {
   name: string;
   role: string;
+  description?: string;
   picture?: string;
   isChild: boolean;
   familyId: string;
@@ -120,6 +121,21 @@ export const AdminPeopleCreateForm: FC<AdminPeopleCreateFormProps> = ({
         {errors.role && (
           <label className="label">
             <span className="label-text-alt">{errors.role.message}</span>
+          </label>
+        )}
+      </div>
+      <div className="form-control w-full max-w-xl">
+        <label className="label">
+          <span className="label-text">Describe this person (optional)</span>
+        </label>
+        <textarea
+          placeholder="Type here"
+          className="textarea-bordered textarea w-full"
+          {...register('description')}
+        />
+        {errors.description && (
+          <label className="label">
+            <span className="label-text-alt">{errors.description.message}</span>
           </label>
         )}
       </div>
