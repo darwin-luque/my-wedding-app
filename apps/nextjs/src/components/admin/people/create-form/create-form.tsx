@@ -83,7 +83,7 @@ export const AdminPeopleCreateForm: FC<AdminPeopleCreateFormProps> = ({
       </div>
       <div className="form-control w-full max-w-md">
         <label className="label">
-          <span className="label-text">What is the person&apos;s name?</span>
+          <span className="label-text">What is the person&apos;s family?</span>
         </label>
         <select
           className="select-bordered select w-full"
@@ -145,7 +145,7 @@ export const AdminPeopleCreateForm: FC<AdminPeopleCreateFormProps> = ({
       </div>
       <div className="form-control w-fit">
         <label className="label cursor-pointer gap-4">
-          <span className="label-text">Is Child?</span>
+          <span className="label-text">Is it a child?</span>
           <input {...register('isChild')} type="checkbox" className="toggle" />
         </label>
       </div>
