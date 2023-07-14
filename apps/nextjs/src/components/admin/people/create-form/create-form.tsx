@@ -106,7 +106,9 @@ export const AdminPeopleCreateForm: FC<AdminPeopleCreateFormProps> = ({
           {...register('role')}
           defaultValue="NONE"
         >
-          <option value="NONE">Guest</option>
+          <option selected value="NONE">
+            Guest
+          </option>
           <option value="BEST_MAN">Best Man</option>
           <option value="BRIDESMAID">Bridesmaid</option>
           <option value="GROOMSMAN">Groomsman</option>
@@ -117,6 +119,7 @@ export const AdminPeopleCreateForm: FC<AdminPeopleCreateFormProps> = ({
           <option value="GROOMS_MOTHER">Mother of the Groom</option>
           <option value="FLOWER_GIRL">Flower Girl</option>
           <option value="RING_BEARER">Ring Bearer</option>
+          <option value="WEDDING_PLANNER">Wedding Planner</option>
         </select>
         {errors.role && (
           <label className="label">

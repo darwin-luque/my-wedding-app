@@ -91,6 +91,7 @@ enum PersonRole {
     GROOMS_FATHER
     BRIDES_MOTHER
     GROOMS_MOTHER
+    WEDDING_PLANNER
 }
 
 enum Who {
