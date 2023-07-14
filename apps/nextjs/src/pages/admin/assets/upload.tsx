@@ -8,6 +8,7 @@ import type { AssetRouter } from '../../../utils/uploadthing';
 import { trpc } from '../../../utils/trpc';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { ThreeDotsInfiniteSignLoader } from '../../../components/ui/loaders/three-dots-infinite-sign';
 
 const breadcrumbs: IBreadcrumb[] = [
   {
@@ -66,10 +67,17 @@ const AdminAssetUploadPage: NextPage = () => {
           </div>
 
           <div className="w-9/12 flex-1 justify-center">
-            <UploadDropzone<AssetRouter>
-              endpoint="imageUploader"
-              onClientUploadComplete={onUploadComplete}
-            />
+            {createMultipleAsset.isLoading ? (
+              <div className="mt-10 flex w-full justify-center">
+                <ThreeDotsInfiniteSignLoader />
+              </div>
+            ) : (
+              <UploadDropzone<AssetRouter>
+                endpoint="imageUploader"
+                onClientUploadComplete={onUploadComplete}
+                onUploadError={console.error}
+              />
+            )}
           </div>
         </main>
       </>
