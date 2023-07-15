@@ -5,21 +5,27 @@ export type RollingBarrelLoaderProps = {
   size?: number;
   bgColor?: string;
   inColor?: string;
+  invert?: boolean;
 };
 
 export const RollingBarrelLoader: FC<RollingBarrelLoaderProps> = ({
   size = 48,
   bgColor = '#fff',
   inColor = '#1e293b',
-}) => (
-  <span
-    className={styles.loader}
-    style={{ width: size, height: size, background: bgColor }}
-  >
+  invert = false,
+}) => {
+  const background = invert ? inColor : bgColor;
+  const foreground = invert ? bgColor : inColor;
+  return (
     <span
-      style={{
-        border: `${Math.ceil((size * 5) / 48)}px solid ${inColor}`,
-      }}
-    />
-  </span>
-);
+      className={styles.loader}
+      style={{ width: size, height: size, background }}
+    >
+      <span
+        style={{
+          border: `${Math.ceil((size * 5) / 48)}px solid ${foreground}`,
+        }}
+      />
+    </span>
+  );
+};

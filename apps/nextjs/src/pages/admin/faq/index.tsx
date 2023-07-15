@@ -5,6 +5,8 @@ import { AdminHeader } from '../../../components/admin/header';
 import { trpc } from '../../../utils/trpc';
 import { AdminFaqCollapsable } from '../../../components/admin/faq/collapsable';
 import { FaPlus } from 'react-icons/fa';
+import { useMemo } from 'react';
+import { RollingBarrelLoader } from '../../../components/ui/loaders/rolling-barrel';
 
 const breadcrumbs: IBreadcrumb[] = [
   {
@@ -28,6 +30,11 @@ const AdminFamilies: NextPage = () => {
   const deleteFaq = trpc.faq.delete.useMutation({
     onSuccess: () => refetch(),
   });
+
+  const isMutationLoading = useMemo(
+    () => createFaq.isLoading || updateFaq.isLoading || deleteFaq.isLoading,
+    [createFaq.isLoading, deleteFaq.isLoading, updateFaq.isLoading],
+  );
 
   const createEmptyFaq = () => {
     createFaq.mutate({
@@ -57,9 +64,19 @@ const AdminFamilies: NextPage = () => {
                 onDelete={() => deleteFaq.mutate({ id: faq.id })}
               />
             ))}
-            <button onClick={createEmptyFaq} className="btn-outline btn gap-2">
-              <FaPlus />
-              <span>Add new question</span>
+            <button
+              onClick={createEmptyFaq}
+              disabled={isMutationLoading}
+              className="btn-outline btn gap-2 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              {isMutationLoading ? (
+                <RollingBarrelLoader invert size={24} />
+              ) : (
+                <>
+                  <FaPlus />
+                  <span>Add new question</span>
+                </>
+              )}
             </button>
           </div>
         </main>
