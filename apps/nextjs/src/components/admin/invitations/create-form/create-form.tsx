@@ -2,6 +2,7 @@ import type { FC } from 'react';
 import { trpc } from '../../../../utils/trpc';
 import { useForm, type FieldErrors } from 'react-hook-form';
 import { AdminConfirmModal } from '../../ui/confirm-modal';
+import { RollingBarrelLoader } from '../../../ui/loaders/rolling-barrel';
 
 export type FormValues = {
   by: string;
@@ -34,18 +35,20 @@ const resolver = (values: FormValues) => ({
 export type AdminInvitationCreateFormProps = {
   onSave: (data: FormValues) => void;
   onInvalid: (data: FieldErrors<FormValues>) => void;
+  isLoading?: boolean;
 };
 
 export const AdminInvitationCreateForm: FC<AdminInvitationCreateFormProps> = ({
   onSave,
   onInvalid,
+  isLoading,
 }) => {
   const { data: families } = trpc.families.list.useQuery();
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm({ resolver });
 
   const onSubmit = handleSubmit(onSave, onInvalid);
@@ -90,9 +93,14 @@ export const AdminInvitationCreateForm: FC<AdminInvitationCreateFormProps> = ({
       </div>
       <a
         href="#create-invitation-modal"
-        className="btn-success btn mt-10 rounded-lg capitalize"
+        className={`btn-success btn mt-10 min-w-[100px] self-center rounded-lg capitalize ${
+          !isDirty || isLoading
+            ? 'pointer-events-none cursor-not-allowed disabled:opacity-50'
+            : ''
+        }`}
+        aria-disabled={!isDirty || isLoading}
       >
-        Publish
+        {isLoading ? <RollingBarrelLoader size={24} /> : 'Publish'}
       </a>
       <AdminConfirmModal
         id="create-invitation-modal"

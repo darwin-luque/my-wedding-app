@@ -52,6 +52,7 @@ const AdminCreatePerson: NextPage = () => {
           <AdminInvitationCreateForm
             onInvalid={onInvalid}
             onSave={createInvitation.mutate}
+            isLoading={createInvitation.isLoading}
           />
         </main>
       </>

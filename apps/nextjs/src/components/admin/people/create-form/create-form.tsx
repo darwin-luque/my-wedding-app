@@ -4,6 +4,7 @@ import { trpc } from '../../../../utils/trpc';
 import { AdminConfirmModal } from '../../ui/confirm-modal';
 import { AdminSelectAssetsModal } from '../../ui/select-assets-modal';
 import Image from 'next/image';
+import { RollingBarrelLoader } from '../../../ui/loaders/rolling-barrel';
 
 export type FormValues = {
   name: string;
@@ -17,6 +18,7 @@ export type FormValues = {
 export type AdminPeopleCreateFormProps = {
   onSave: (data: FormValues) => void;
   onInvalid: (data: FieldErrors<FormValues>) => void;
+  isLoading?: boolean;
 };
 
 const resolver = (values: FormValues) => ({
@@ -40,6 +42,7 @@ const resolver = (values: FormValues) => ({
 export const AdminPeopleCreateForm: FC<AdminPeopleCreateFormProps> = ({
   onSave,
   onInvalid,
+  isLoading,
 }) => {
   const { data: families } = trpc.families.list.useQuery();
   const {
@@ -47,7 +50,7 @@ export const AdminPeopleCreateForm: FC<AdminPeopleCreateFormProps> = ({
     handleSubmit,
     setValue,
     watch,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm({
     resolver,
     defaultValues: {
@@ -174,9 +177,14 @@ export const AdminPeopleCreateForm: FC<AdminPeopleCreateFormProps> = ({
       </div>
       <a
         href="#create-person-modal"
-        className="btn-success btn mt-10 rounded-lg capitalize"
+        className={`btn-success btn mt-10 min-w-[100px] self-center rounded-lg capitalize ${
+          !isDirty || isLoading
+            ? 'pointer-events-none cursor-not-allowed disabled:opacity-50'
+            : ''
+        }`}
+        aria-disabled={!isDirty || isLoading}
       >
-        Publish
+        {isLoading ? <RollingBarrelLoader size={24} /> : 'Publish'}
       </a>
       <AdminConfirmModal
         id="create-person-modal"

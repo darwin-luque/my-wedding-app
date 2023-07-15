@@ -1,6 +1,7 @@
 import { FieldErrors, useForm } from 'react-hook-form';
 import type { FC } from 'react';
 import { AdminConfirmModal } from '../../ui/confirm-modal';
+import { RollingBarrelLoader } from '../../../ui/loaders/rolling-barrel';
 
 export type FormValues = {
   name: string;
@@ -9,6 +10,7 @@ export type FormValues = {
 export type AdminFamilyCreateFormProps = {
   onSave: (data: FormValues) => void;
   onInvalid: (data: FieldErrors<FormValues>) => void;
+  isLoading?: boolean;
 };
 
 const resolver = (values: FormValues) => ({
@@ -26,11 +28,12 @@ const resolver = (values: FormValues) => ({
 export const AdminFamilyCreateForm: FC<AdminFamilyCreateFormProps> = ({
   onSave,
   onInvalid,
+  isLoading,
 }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm({ resolver });
 
   const onSubmit = handleSubmit(onSave, onInvalid);
@@ -55,9 +58,14 @@ export const AdminFamilyCreateForm: FC<AdminFamilyCreateFormProps> = ({
       </div>
       <a
         href="#create-family-modal"
-        className="btn-success btn mt-10 rounded-lg capitalize"
+        className={`btn-success btn mt-10 min-w-[100px] self-center rounded-lg capitalize ${
+          !isDirty || isLoading
+            ? 'pointer-events-none cursor-not-allowed disabled:opacity-50'
+            : ''
+        }`}
+        aria-disabled={!isDirty || isLoading}
       >
-        Publish
+        {isLoading ? <RollingBarrelLoader size={24} /> : 'Publish'}
       </a>
       <AdminConfirmModal
         id="create-family-modal"

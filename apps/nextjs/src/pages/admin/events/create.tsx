@@ -38,6 +38,7 @@ const AdminCreateEvent: NextPage = () => {
           <AdminEventCreateForm
             onInvalid={() => null}
             onSave={createEvent.mutate}
+            isLoading={createEvent.isLoading}
           />
         </main>
       </>

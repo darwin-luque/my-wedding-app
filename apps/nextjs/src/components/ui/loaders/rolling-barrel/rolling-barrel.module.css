@@ -1,0 +1,21 @@
+.loader {
+  background: #fff;
+  border-radius: 50%;
+  position: relative;
+  animation: roll 1s ease-in-out infinite alternate;
+}
+.loader span {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  border: 3px solid;
+}
+
+@keyframes roll {
+  0% {
+    transform: translateX(-150%) rotate(0deg);
+  }
+  100% {
+    transform: translateX(150%) rotate(360deg);
+  }
+}

@@ -50,6 +50,7 @@ const AdminCreatePerson: NextPage = () => {
           <AdminPeopleCreateForm
             onSave={createPerson.mutate}
             onInvalid={onInvalid}
+            isLoading={createPerson.isLoading}
           />
         </main>
       </>

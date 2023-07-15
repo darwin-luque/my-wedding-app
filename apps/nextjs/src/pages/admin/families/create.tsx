@@ -50,6 +50,7 @@ const AdminCreateFamily: NextPage = () => {
           <AdminFamilyCreateForm
             onSave={createFamily.mutate}
             onInvalid={onInvalid}
+            isLoading={createFamily.isLoading}
           />
         </main>
       </>

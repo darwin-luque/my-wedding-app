@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import Image from 'next/image';
 import { AdminSelectAssetsModal } from '../../ui/select-assets-modal';
 import { AdminConfirmModal } from '../../ui/confirm-modal';
+import { RollingBarrelLoader } from '../../../ui/loaders/rolling-barrel';
 
 const googleMapsUrlRegex = /^https?\:\/\/(www\.)?google\.[a-z]+\/maps\b/;
 
@@ -18,6 +19,7 @@ export type FormValues = {
 export type AdminEventCreateFormProps = {
   onSave: (data: FormValues) => void;
   onInvalid: (data: FieldErrors<FormValues>) => void;
+  isLoading?: boolean;
 };
 
 const resolver = (values: FormValues) => ({
@@ -59,13 +61,14 @@ const resolver = (values: FormValues) => ({
 export const AdminEventCreateForm: FC<AdminEventCreateFormProps> = ({
   onSave,
   onInvalid,
+  isLoading,
 }) => {
   const {
     register,
     handleSubmit,
     setValue,
     watch,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm({
     resolver,
     defaultValues: { pictures: [] },
@@ -185,9 +188,14 @@ export const AdminEventCreateForm: FC<AdminEventCreateFormProps> = ({
       </div>
       <a
         href="#create-event-modal"
-        className="btn-success btn mt-10 self-center rounded-lg capitalize"
+        className={`btn-success btn mt-10 min-w-[100px] self-center rounded-lg capitalize ${
+          !isDirty || isLoading
+            ? 'pointer-events-none cursor-not-allowed disabled:opacity-50'
+            : ''
+        }`}
+        aria-disabled={!isDirty || isLoading}
       >
-        Publish
+        {isLoading ? <RollingBarrelLoader size={24} /> : 'Publish'}
       </a>
       <AdminConfirmModal
         id="create-event-modal"
