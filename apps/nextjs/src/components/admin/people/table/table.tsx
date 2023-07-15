@@ -5,6 +5,7 @@ import {
   type PersonRole,
   type Invitation,
 } from '@acme/db';
+import { FaUser } from 'react-icons/fa';
 import type { FC } from 'react';
 import { useRouter } from 'next/router';
 import { readableRole } from '../../../../utils/readable-role';
@@ -30,13 +31,19 @@ const columns: ColumnsType<PersonRelated> = [
     render: (picture) => (
       <div className="avatar">
         <div className="mask mask-squircle h-12 w-12">
-          <Image
-            src={picture}
-            alt="avatar"
-            width={48}
-            height={48}
-            className="mask mask-squircle h-12 w-12 object-cover"
-          />
+          {picture ? (
+            <Image
+              src={picture}
+              alt="avatar"
+              width={48}
+              height={48}
+              className="mask mask-squircle h-12 w-12 object-cover"
+            />
+          ) : (
+            <div className="mask mask-squircle flex h-12 w-12 items-center justify-center bg-slate-100 object-cover">
+              <FaUser size={36} />
+            </div>
+          )}
         </div>
       </div>
     ),

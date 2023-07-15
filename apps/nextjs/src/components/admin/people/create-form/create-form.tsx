@@ -68,7 +68,7 @@ export const AdminPeopleCreateForm: FC<AdminPeopleCreateFormProps> = ({
     <form className="w-[90%] px-10" onSubmit={(e) => e.preventDefault()}>
       <div className="form-control w-full max-w-md">
         <label className="label">
-          <span className="label-text">What is this person&apos;s name?</span>
+          <span className="label-text">What is the name of the person?</span>
         </label>
         <input
           type="text"
@@ -84,7 +84,9 @@ export const AdminPeopleCreateForm: FC<AdminPeopleCreateFormProps> = ({
       </div>
       <div className="form-control w-full max-w-md">
         <label className="label">
-          <span className="label-text">What is the person&apos;s family?</span>
+          <span className="label-text">
+            Which family does this person belongs to?
+          </span>
         </label>
         <select
           className="select-bordered select w-full"
@@ -99,7 +101,9 @@ export const AdminPeopleCreateForm: FC<AdminPeopleCreateFormProps> = ({
       </div>
       <div className="form-control w-full max-w-md">
         <label className="label">
-          <span className="label-text">What is the person&apos;s role?</span>
+          <span className="label-text">
+            What&apos;s the person&apos;s role on the big day?
+          </span>
         </label>
         <select
           className="select-bordered select w-full"
